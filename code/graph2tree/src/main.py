@@ -30,7 +30,7 @@ log_folder = 'logs'
 model_folder = 'models'
 outputs_folder = 'outputs'
 result_folder = './out/'
-data_path = './data/'
+data_path = '../../data/'
 board_path = './runs/'
 
 def read_json(path):
