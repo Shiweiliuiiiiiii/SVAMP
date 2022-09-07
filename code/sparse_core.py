@@ -93,10 +93,11 @@ class Masking(object):
                     self.names.append(name)
                     self.masks[name] = torch.ones_like(tensor, dtype=torch.float32, requires_grad=False).to(self.device)
 
-        print('Removing bert_model.pooler')
-        self.remove_weight_partial_name('pooler')
-        print('Removing merge layers')
-        self.remove_weight_partial_name('merge')
+        if self.sparse_init == 'snip':
+            print('Removing bert_model.pooler')
+            self.remove_weight_partial_name('pooler')
+            print('Removing merge layers')
+            self.remove_weight_partial_name('merge')
 
 
     def remove_weight(self, name):
