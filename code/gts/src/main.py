@@ -202,7 +202,7 @@ def main():
 				if mask.sparse_init == 'snip':
 					mask.init_growth_prune_and_redist()
 
-					embedding_copy, encoder_copy, predict_copy, generate_copy, merge_copy = copy.deepcopy(embedding_copy), copy.deepcopy(encoder), copy.deepcopy(
+					embedding_copy, encoder_copy, predict_copy, generate_copy, merge_copy = copy.deepcopy(embedding), copy.deepcopy(encoder), copy.deepcopy(
 						predict), copy.deepcopy(generate), copy.deepcopy(merge)
 					encoder_copy.train()
 					predict_copy.train()
