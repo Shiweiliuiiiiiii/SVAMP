@@ -95,6 +95,8 @@ class Masking(object):
 
         print('Removing bert_model.pooler')
         self.remove_weight_partial_name('pooler')
+        print('Removing merge layers')
+        self.remove_weight_partial_name('merge')
 
 
     def remove_weight(self, name):
