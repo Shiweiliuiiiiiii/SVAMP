@@ -190,6 +190,8 @@ def main():
 			if args.sparse:
 
 				modules = [encoder, predict, generate, merge]
+				input_batches, input_lengths, output_batches, output_lengths, nums_batches, num_stack_batches, num_pos_batches, num_size_batches = prepare_train_batch(
+					train_pairs, config.batch_size)
 
 				decay = CosineDecay(args.prune_rate, int(args.epochs * len(output_lengths)))
 				mask = Masking(None, prune_rate_decay=decay, prune_rate=args.prune_rate,
@@ -199,8 +201,6 @@ def main():
 
 				if mask.sparse_init == 'snip':
 					mask.init_growth_prune_and_redist()
-					input_batches, input_lengths, output_batches, output_lengths, nums_batches, num_stack_batches, num_pos_batches, num_size_batches = prepare_train_batch(
-						train_pairs, config.batch_size)
 
 					encoder_copy, predict_copy, generate_copy, merge_copy = copy.deepcopy(encoder), copy.deepcopy(
 						predict), copy.deepcopy(generate), copy.deepcopy(merge)
