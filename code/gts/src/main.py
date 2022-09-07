@@ -20,7 +20,7 @@ from src.utils.helper import *
 from src.utils.logger import *
 from src.utils.expressions_transfer import *
 import sys
-sys.path.append('../../')
+sys.path.append('../')
 from sparse_core import Masking, CosineDecay
 import copy
 global log_folder
