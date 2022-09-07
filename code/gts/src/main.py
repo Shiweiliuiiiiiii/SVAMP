@@ -189,7 +189,7 @@ def main():
 			mask = None
 			if args.sparse:
 
-				modules = [encoder, predict, generate, merge]
+				modules = [embedding, encoder, predict, generate, merge]
 				input_batches, input_lengths, output_batches, output_lengths, nums_batches, num_stack_batches, num_pos_batches, num_size_batches = prepare_train_batch(
 					train_pairs, config.batch_size)
 
@@ -202,13 +202,13 @@ def main():
 				if mask.sparse_init == 'snip':
 					mask.init_growth_prune_and_redist()
 
-					encoder_copy, predict_copy, generate_copy, merge_copy = copy.deepcopy(encoder), copy.deepcopy(
+					embedding_copy, encoder_copy, predict_copy, generate_copy, merge_copy = copy.deepcopy(embedding_copy), copy.deepcopy(encoder), copy.deepcopy(
 						predict), copy.deepcopy(generate), copy.deepcopy(merge)
 					encoder_copy.train()
 					predict_copy.train()
 					generate_copy.train()
 					merge_copy.train()
-					modules_copy = [encoder_copy, predict_copy, generate_copy, merge_copy]
+					modules_copy = [embedding_copy, encoder_copy, predict_copy, generate_copy, merge_copy]
 
 					idx = 0
 					loss_snip = train_tree(
