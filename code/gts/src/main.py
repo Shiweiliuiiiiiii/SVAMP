@@ -222,6 +222,7 @@ def main():
 					for module in modules_copy:
 						for name, weight in module.named_parameters():
 							if name not in mask.masks: continue
+							print(name)
 							grads_abs.append(torch.abs(weight * weight.grad))
 
 					# Gather all scores in a single vector and normalise
