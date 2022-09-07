@@ -13,4 +13,5 @@ source /home/sliu/miniconda3/etc/profile.d/conda.sh
 source activate prune_cry
 
 python -m src.main -mode train -gpu 0 -embedding roberta -emb_name roberta-base -embedding_size 768 -hidden_size 512 \
--depth 2 -lr 0.001 -emb_lr 8e-6 -batch_size 4 -epochs 50 -dataset cv_asdiv-a -full_cv -run_name gts_run_cv_asdiv-a
+-depth 2 -lr 0.001 -emb_lr 8e-6 -batch_size 4 -epochs 50 -dataset cv_asdiv-a -full_cv -run_name gts_run_cv_asdiv-a \
+--fix --sparse_init random --sparsity 0.2 --sparse

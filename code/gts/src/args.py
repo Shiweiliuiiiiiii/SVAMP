@@ -85,5 +85,22 @@ def build_parser():
 
 	parser.add_argument('-len_generate_nums', type=int, default=0, help='store length of generate_nums')
 	parser.add_argument('-copy_nums', type=int, default=0, help='store copy_nums')
-	
+
+	# sparse training and pruning
+	parser.add_argument('--sparse', action='store_true', help='Enable sparse mode. Default: True.')
+	parser.add_argument('--fix', action='store_true', help='Fix sparse connectivity during training. Default: True.')
+	parser.add_argument('--fp16', action='store_true', help='Enable fp16 training.')
+	parser.add_argument('--sparse_init', type=str, default='ERK', help='sparse initialization')
+	parser.add_argument('--growth', type=str, default='random',
+						help='Growth mode. Choose from: momentum, random, random_unfired, and gradient.')
+	parser.add_argument('--prune', type=str, default='magnitude',
+						help='Death mode / pruning mode. Choose from: magnitude, SET, threshold.')
+	parser.add_argument('--redistribution', type=str, default='none',
+						help='Redistribution mode. Choose from: momentum, magnitude, nonzeros, or none.')
+	parser.add_argument('--prune_rate', type=float, default=0.50, help='The pruning rate / death rate.')
+	parser.add_argument('--sparsity', type=float, default=0.05, help='The sparsity of the overall sparse network.')
+	parser.add_argument('--update_frequency', type=int, default=100, metavar='N',
+						help='how many iterations to train between parameter exploration')
+	parser.add_argument('--imp_iters', type=int, default=11, help='how many iterations for IMP')
+
 	return parser

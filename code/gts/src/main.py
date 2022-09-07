@@ -19,7 +19,10 @@ from src.components.contextual_embeddings import *
 from src.utils.helper import *
 from src.utils.logger import *
 from src.utils.expressions_transfer import *
-
+import sys
+sys.path.append('../../')
+from sparse_core import Masking, CosineDecay
+import copy
 global log_folder
 global model_folder
 global result_folder
@@ -180,6 +183,70 @@ def main():
 			for num in generate_nums:
 				generate_num_ids.append(output_lang.word2index[num])
 
+			############## code for sparse #################
+
+			# performing pruning at the first epoch
+			mask = None
+			if args.sparse:
+
+				modules = [encoder, predict, generate, merge]
+
+				decay = CosineDecay(args.prune_rate, int(args.epochs * len(output_lengths)))
+				mask = Masking(None, prune_rate_decay=decay, prune_rate=args.prune_rate,
+							   sparsity=args.sparsity, prune_mode=args.prune, growth_mode=args.growth,
+							   redistribution_mode=args.redistribution, fp16=args.fp16, args=args)
+				mask.add_module(modules)
+
+				if mask.sparse_init == 'snip':
+					mask.init_growth_prune_and_redist()
+					input_batches, input_lengths, output_batches, output_lengths, nums_batches, num_stack_batches, num_pos_batches, num_size_batches = prepare_train_batch(
+						train_pairs, config.batch_size)
+
+					encoder_copy, predict_copy, generate_copy, merge_copy = copy.deepcopy(encoder), copy.deepcopy(
+						predict), copy.deepcopy(generate), copy.deepcopy(merge)
+					encoder_copy.train()
+					predict_copy.train()
+					generate_copy.train()
+					merge_copy.train()
+					modules_copy = [encoder_copy, predict_copy, generate_copy, merge_copy]
+
+					idx = 0
+					loss_snip = train_tree(
+						config, input_batches[idx], input_lengths[idx], output_batches[idx], output_lengths[idx],
+						num_stack_batches[idx], num_size_batches[idx], generate_num_ids, embedding, encoder, predict, generate, merge,
+						embedding_optimizer, encoder_optimizer, predict_optimizer, generate_optimizer, merge_optimizer, input_lang, output_lang,
+						num_pos_batches[idx], mask=None)
+					# torch.nn.utils.clip_grad_norm_(need_optimized_parameters, args.max_grad_norm)
+
+					grads_abs = []
+					for module in modules_copy:
+						for name, weight in module.named_parameters():
+							if name not in mask.masks: continue
+							grads_abs.append(torch.abs(weight * weight.grad))
+
+					# Gather all scores in a single vector and normalise
+					all_scores = torch.cat([torch.flatten(x) for x in grads_abs])
+
+					num_params_to_keep = int(len(all_scores) * (1 - mask.sparsity))
+					threshold, _ = torch.topk(all_scores, num_params_to_keep + 1, sorted=True)
+					acceptable_score = threshold[-1]
+
+					snip_masks = []
+					for i, g in enumerate(grads_abs):
+						mask_ = (g > acceptable_score).float()
+						snip_masks.append(mask_)
+
+					for snip_mask, name in zip(snip_masks, mask.masks):
+						mask.masks[name] = snip_mask
+				else:
+					mask.init(model=modules, train_loader=None, device=mask.device, mode=mask.sparse_init,
+							  density=(1 - args.sparsity))
+				mask.apply_mask()
+				mask.print_status()
+
+			############## code for sparse #################
+
+
 			max_value_corr = 0
 			len_total_eval = 0
 			max_val_acc = 0.0
@@ -208,7 +275,7 @@ def main():
 						config, input_batches[idx], input_lengths[idx], output_batches[idx], output_lengths[idx],
 						num_stack_batches[idx], num_size_batches[idx], generate_num_ids, embedding, encoder, predict, generate, merge,
 						embedding_optimizer, encoder_optimizer, predict_optimizer, generate_optimizer, merge_optimizer, input_lang, output_lang, 
-						num_pos_batches[idx])
+						num_pos_batches[idx], mask=mask)
 					loss_total += loss
 					print("Completed {} / {}...".format(idx, len(input_lengths)), end = '\r', flush = True)
 
