@@ -204,6 +204,7 @@ def main():
 
 					embedding_copy, encoder_copy, predict_copy, generate_copy, merge_copy = copy.deepcopy(embedding), copy.deepcopy(encoder), copy.deepcopy(
 						predict), copy.deepcopy(generate), copy.deepcopy(merge)
+					embedding_copy.train()
 					encoder_copy.train()
 					predict_copy.train()
 					generate_copy.train()
