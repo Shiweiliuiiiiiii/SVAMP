@@ -103,4 +103,5 @@ def build_parser():
 						help='how many iterations to train between parameter exploration')
 	parser.add_argument('--imp_iters', type=int, default=11, help='how many iterations for IMP')
 
+	parser.add_argument('--output_dir', default='', type=str, required=True, help='Model Saved Path, Output Directory')
 	return parser

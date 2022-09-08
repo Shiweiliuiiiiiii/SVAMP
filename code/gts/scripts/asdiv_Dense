@@ -12,6 +12,9 @@
 source /home/sliu/miniconda3/etc/profile.d/conda.sh
 source activate prune_cry
 
+
+saved_dir=/home/sliu/project_space/pruning_cfails/Math/gts/asdiv/dense/
+
 python -m src.main -mode train -gpu 0 -embedding roberta -emb_name roberta-base -embedding_size 768 -hidden_size 512 \
--depth 2 -lr 0.001 -emb_lr 8e-6 -batch_size 4 -epochs 50 -dataset cv_asdiv-a -full_cv -run_name gts_run_cv_asdiv-a \
---fix --sparse_init random --sparsity 0.2 --sparse
+-depth 2 -lr 0.001 -emb_lr 8e-6 -batch_size 4 -epochs 50 -dataset cv_asdiv-a -full_cv -run_name run_cv_asdiv-a \
+--fix --sparse_init random --sparsity 0.2 --sparse --output_dir $saved_dir
