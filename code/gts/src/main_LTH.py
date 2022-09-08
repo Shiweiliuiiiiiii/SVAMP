@@ -62,6 +62,8 @@ def main():
 		data_name = config.dataset
 		data_path = data_path + data_name + '/'
 
+		if not os.path.exists(args.output_dir):
+			os.makedirs(args.output_dir)
 
 		# start LTH
 		output_files = os.listdir(os.path.join(args.output_dir))
