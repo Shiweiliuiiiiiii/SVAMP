@@ -17,7 +17,7 @@ do
 saved_dir=/home/sliu/project_space/pruning_cfails/Math/gts/asdiv/imp/$sparsity
 
 python -m src.main_LTH -mode train -gpu 0 -embedding roberta -emb_name roberta-base -embedding_size 768 -hidden_size 512 \
--depth 2 -lr 0.001 -emb_lr 8e-6 -batch_size 4 -epochs 50 -dataset cv_asdiv-a -full_cv -run_name run_cv_asdiv-a \
+-depth 2 -lr 0.001 -emb_lr 8e-6 -batch_size 4 -epochs 1 -dataset cv_asdiv-a -full_cv -run_name run_cv_asdiv-a \
 --fix --sparse_init iterative_gm --sparsity $sparsity --sparse --output_dir $saved_dir -save_model
 
 done
