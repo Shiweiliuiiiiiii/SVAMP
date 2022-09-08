@@ -84,7 +84,6 @@ class Masking(object):
             self.update_frequency = None
 
 
-
     def add_module(self, modules):
         self.modules = modules
         for module in self.modules:
@@ -93,7 +92,7 @@ class Masking(object):
                     self.names.append(name)
                     self.masks[name] = torch.ones_like(tensor, dtype=torch.float32, requires_grad=False).to(self.device)
 
-        if self.sparse_init == 'snip':
+        if self.sparse_init == 'snip' or (not self.fix):
             print('Removing bert_model.pooler')
             self.remove_weight_partial_name('pooler')
             print('Removing merge layers')
@@ -393,7 +392,6 @@ class Masking(object):
                 self.name2nonzeros[name] = mask.sum().item()
                 self.name2zeros[name] = mask.numel() - self.name2nonzeros[name]
                 # prune
-                print(name)
                 new_mask = self.prune_func(self, mask, weight, name)
                 removed = self.name2nonzeros[name] - new_mask.sum().item()
                 self.name2removed[name] = removed
