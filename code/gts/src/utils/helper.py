@@ -169,3 +169,17 @@ def get_latest_checkpoint(model_path, logger):
 		logger.debug('Checkpoint found at : {}'.format(ckpt_path))
 
 		return ckpt_path
+
+def save_initialization(embedding, encoder, predict, generate, merge, args, logger):
+	if not os.path.exists(os.path.join(args.output_dir, "Initialization_seed{}".format(args.seed))):
+		os.makedirs(os.path.join(args.output_dir, "Initialization_seed{}".format(args.seed)))
+	torch.save(embedding.state_dict(),
+			   os.path.join(args.output_dir, "Initialization_seed{}".format(args.seed), "embedding.ckpt"))
+	torch.save(encoder.state_dict(),
+			   os.path.join(args.output_dir, "Initialization_seed{}".format(args.seed), "encoder.ckpt"))
+	torch.save(predict.state_dict(),
+			   os.path.join(args.output_dir, "Initialization_seed{}".format(args.seed), "predict.ckpt"))
+	torch.save(generate.state_dict(),
+			   os.path.join(args.output_dir, "Initialization_seed{}".format(args.seed), "generate.ckpt"))
+	torch.save(merge.state_dict(),
+			   os.path.join(args.output_dir, "Initialization_seed{}".format(args.seed), "merge.ckpt"))
