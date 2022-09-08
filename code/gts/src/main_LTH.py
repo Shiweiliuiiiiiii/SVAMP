@@ -116,8 +116,7 @@ def main():
 				if config.results:
 					config.result_path = os.path.join(result_folder, 'val_results_{}.json'.format(config.dataset))
 
-				if logger: del logger # avoid logger repeating
-				
+
 				logger = get_logger(run_name, log_file, logging.DEBUG)
 
 				logger.info('Experiment Name: {}'.format(config.run_name))
