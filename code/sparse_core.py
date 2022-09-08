@@ -393,6 +393,7 @@ class Masking(object):
                 self.name2nonzeros[name] = mask.sum().item()
                 self.name2zeros[name] = mask.numel() - self.name2nonzeros[name]
                 # prune
+                print(name)
                 new_mask = self.prune_func(self, mask, weight, name)
                 removed = self.name2nonzeros[name] - new_mask.sum().item()
                 self.name2removed[name] = removed
