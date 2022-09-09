@@ -19,7 +19,7 @@ saved_dir=/home/sliu/project_space/pruning_cfails/Math/gts/asdiv/snip_rigl/$spar
 python -m src.main -mode train -gpu 0 -embedding roberta -emb_name roberta-base -embedding_size 768 -hidden_size 512 \
 -depth 2 -lr 0.001 -emb_lr 8e-6 -batch_size 4 -epochs 50 -dataset cv_asdiv-a -full_cv -run_name run_cv_asdiv-a \
 --sparse_init snip --sparsity $sparsity --sparse --output_dir $saved_dir \
---prune snip --prune_rate 0.5 --growth gradient --update_frequency 1000 --redistribution none -save_model
+--prune magnitude --prune_rate 0.5 --growth gradient --update_frequency 1000 --redistribution none -save_model
 
 
 done
