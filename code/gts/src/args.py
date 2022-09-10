@@ -104,5 +104,5 @@ def build_parser():
 	parser.add_argument('--imp_iters', type=int, default=11, help='how many iterations for IMP')
 
 	parser.add_argument('--output_dir', default='', type=str, required=True, help='Model Saved Path, Output Directory')
-	parser.add_argument('--pretrained_dir', default='', type=str, required=True, help='Path of pretrained models')
+	parser.add_argument('--pretrained_dir', default='', type=str, help='Path of pretrained models')
 	return parser
