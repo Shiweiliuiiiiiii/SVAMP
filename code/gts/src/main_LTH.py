@@ -489,7 +489,6 @@ def main():
 			config.imp_dir = os.path.join(args.output_dir, "IMP_best_iter_{}".format(iter))
 			config.model_load_dir =  os.path.join(args.output_dir, "IMP_best_iter_{}".format(iter-1))
 
-			config.val_result_path = os.path.join(args.imp_dir, result_folder, 'CV_results_{}.json'.format(data_name))
 			if not os.path.exists(os.path.join(args.imp_dir, result_folder)):
 				os.makedirs(os.path.join(args.imp_dir, result_folder))
 
