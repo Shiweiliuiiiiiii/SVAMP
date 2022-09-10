@@ -267,7 +267,7 @@ def main():
 			total_value_corr += best_acc[w][0]
 			total_len += best_acc[w][1]
 		fold_acc_score = float(total_value_corr)/total_len
-	
+
 		# store_val_results(config, fold_acc_score, folds_scores)
 		logger.info('Final Val score: {}'.format(fold_acc_score))
 
