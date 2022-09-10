@@ -263,7 +263,7 @@ def main():
 		total_value_corr = 0
 		total_len = 0
 		for w in range(len(best_acc)):
-			folds_scores.append(float(best_acc[w][0])/best_acc[w][1])
+			# folds_scores.append(float(best_acc[w][0])/best_acc[w][1])
 			total_value_corr += best_acc[w][0]
 			total_len += best_acc[w][1]
 		fold_acc_score = float(total_value_corr)/total_len
