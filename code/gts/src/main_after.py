@@ -158,7 +158,7 @@ def main():
 				generate_num_ids.append(output_lang.word2index[num])
 
 			# load the pretrained initialization
-			logger.info('loading pretrained models.')
+			logger.info('loading pretrained models from {}.'.format(config.model_load_path))
 
 			ckpt_path = os.path.join(config.model_load_path, 'model.pt')
 			checkpoint = torch.load(ckpt_path, map_location=lambda storage, loc: storage)
