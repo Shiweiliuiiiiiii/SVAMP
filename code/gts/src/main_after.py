@@ -519,7 +519,7 @@ def main():
 			f_out.write('---------------------------------------\n')
 			f_out.close()
 
-		eex_num = 0
+		ex_num = 0
 		for test_batch in test_pairs:
 			# test_res = evaluate_tree(test_batch[0], test_batch[1], generate_num_ids, encoder, predict, generate,
 			# 						 merge, output_lang, test_batch[5], beam_size=config.beam_size)
