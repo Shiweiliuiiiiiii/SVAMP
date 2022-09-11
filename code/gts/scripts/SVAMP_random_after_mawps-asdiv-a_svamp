@@ -17,8 +17,8 @@ do
 saved_dir=/home/sliu/project_space/pruning_cfails/Math/gts/mawps-asdiv-a_svamp/random_after/$sparsity
 
 python -m src.main_after -mode train -gpu 0 -embedding roberta -emb_name roberta-base -embedding_size 768 -hidden_size 512 \
--depth 2 -lr 0.001 -emb_lr 8e-6 -batch_size 8 -epochs 50 -dataset mawps-asdiv-a_svamp -full_cv -run_name rnn_mawps-asdiv-a_svamp \
+-depth 2 -lr 0.001 -emb_lr 8e-6 -batch_size 8 -epochs 50 -dataset mawps-asdiv-a_svamp -run_name rnn_mawps-asdiv-a_svamp \
 --fix --sparse_init random --sparsity $sparsity --sparse --output_dir $saved_dir -save_model \
---pretrained_dir /home/sliu/project_space/pruning_cfails/Math/gts/mawps-asdiv-a_svamp/dense/
+--pretrained_dir /home/sliu/project_space/pruning_cfails/Math/gts/mawps-asdiv-a_svamp/dense/ -save_model -no-full_cv -results
 
 done
