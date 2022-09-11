@@ -499,6 +499,7 @@ def main():
 			config.board_path = os.path.join(args.imp_dir, board_path, run_name)
 			config.outputs_path = os.path.join(args.imp_dir, outputs_folder, run_name)
 
+
 			for file in [config.log_path, config.model_path, config.board_path, config.outputs_path]:
 				if not os.path.exists(file): os.makedirs(file)
 
@@ -508,7 +509,7 @@ def main():
 			log_file = os.path.join(config.log_path, 'log.txt')
 
 			if config.results:
-				config.result_path = os.path.join(result_folder, 'val_results_{}.json'.format(config.dataset))
+				config.result_path = os.path.join(args.imp_dir, result_folder, 'val_results_{}.json'.format(config.dataset))
 
 			logger = get_logger(run_name, log_file, logging.DEBUG)
 
