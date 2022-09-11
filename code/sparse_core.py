@@ -17,6 +17,7 @@ class CosineDecay(object):
     def __init__(self, prune_rate, T_max, eta_min=0.005, last_epoch=-1, init_step=0):
         self.sgd = optim.SGD(torch.nn.ParameterList([torch.nn.Parameter(torch.zeros(1))]), lr=prune_rate)
         self.cosine_stepper = torch.optim.lr_scheduler.CosineAnnealingLR(self.sgd, T_max, eta_min, last_epoch)
+        self.T_max = T_max
         if init_step!=0:
             for i in range(init_step):
                 self.cosine_stepper.step()
