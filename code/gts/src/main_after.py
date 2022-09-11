@@ -566,7 +566,6 @@ def main():
 		if float(value_ac) / eval_total > max_val_acc:
 			max_val_acc = float(value_ac) / eval_total
 			eq_acc = float(equation_ac) / eval_total
-			best_epoch = epoch+1
 
 		od = OrderedDict()
 		od['val_acc_epoch'] = float(value_ac) / eval_total
