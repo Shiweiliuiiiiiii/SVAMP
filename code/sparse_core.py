@@ -170,9 +170,10 @@ class Masking(object):
         if mode == 'dense':
             print('initialized with dense model')
             self.baseline_nonzero = 0
-            for name, weight in model.named_parameters():
-                if name not in self.masks: continue
-                self.masks[name] = torch.ones_like(weight, dtype=torch.float32, requires_grad=False).to(device)
+            for module in self.modules:
+                for name, weight in module.named_parameters():
+                    if name not in self.masks: continue
+                    self.masks[name] = torch.ones_like(weight, dtype=torch.float32, requires_grad=False).to(device)
 
         if mode == 'one_shot_gm':
             print('initialize by one_shot_gm')
