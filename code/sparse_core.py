@@ -48,10 +48,10 @@ class Masking(object):
             print('Growth mode: {0} not supported!'.format(growth_mode))
             print('Supported modes are:', str(growth_modes))
 
-        self.args = args
-        self.fix = self.args.fix
-        self.sparse_init = self.args.sparse_init
-        self.update_frequency = self.args.update_frequency
+        self.fix = args.fix
+        self.sparse_init = args.sparse_init
+        self.sparse_mode = args.sparse_mode
+        self.update_frequency = args.update_frequency
         self.sparsity = sparsity
         self.device = torch.device('cuda')
         self.growth_mode = growth_mode
@@ -62,6 +62,11 @@ class Masking(object):
         self.growth_func = growth_mode
         self.prune_func = prune_mode
         self.redistribution_func = redistribution_mode
+
+        # parameters for GMP
+        self.total_step = self.prune_rate_decay.T_max
+        self.final_prune_time = int(self.total_step * args.final_prune_time)
+        self.initial_prune_time = int(self.total_step * args.initial_prune_time)
 
         self.global_growth = False
         self.global_prune = False
@@ -161,6 +166,13 @@ class Masking(object):
     def init(self, model, train_loader , device, mode='snip', density=0.05, erk_power_scale=1.0):
         self.init_growth_prune_and_redist()
 
+        if mode == 'dense':
+            print('initialized with dense model')
+            self.baseline_nonzero = 0
+            for name, weight in model.named_parameters():
+                if name not in self.masks: continue
+                self.masks[name] = torch.ones_like(weight, dtype=torch.float32, requires_grad=False).to(device)
+
         if mode == 'one_shot_gm':
             print('initialize by one_shot_gm')
             self.baseline_nonzero = 0
@@ -180,7 +192,7 @@ class Masking(object):
             for module in self.modules:
                 for name, weight in module.named_parameters():
                     if name not in self.masks: continue
-                    self.masks[name] = ((torch.abs(weight)) > acceptable_score).float()
+                    self.masks[name] = ((torch.abs(weight)) > acceptable_score).float().data.to(device)
 
         elif mode == 'random':
             print('initialize by random pruning')
@@ -188,7 +200,7 @@ class Masking(object):
             for module in self.modules:
                 for name, weight in module.named_parameters():
                     if name not in self.masks: continue
-                    self.masks[name] = (torch.rand(weight.shape) < density).float().data.to('cuda')
+                    self.masks[name] = (torch.rand(weight.shape) < density).float().data.to(device)
 
 
         if mode == 'iterative_gm':
@@ -222,7 +234,7 @@ class Masking(object):
             for module in self.modules:
                 for name, weight in module.named_parameters():
                     if name not in self.masks: continue
-                    self.masks[name] = ((torch.abs(weight)) > acceptable_score).float()
+                    self.masks[name] = ((torch.abs(weight)) > acceptable_score).float().data.to(device)
 
         if mode == 'uniform':
             print('initialized with uniform')
@@ -362,10 +374,18 @@ class Masking(object):
         self.steps += 1
 
         if self.update_frequency is not None:
-            if self.steps % self.update_frequency == 0:
-                print('*********************************Dynamic Sparsity********************************')
-                self.truncate_weights()
-                self.print_nonzero_counts()
+            if self.sparse_mode == 'GMP':
+                if self.steps >= self.initial_prune_time and self.steps < self.final_prune_time and self.steps % self.update_frequency == 0:
+                    print('*********************************Gradual Magnitude Pruning***********************')
+                    current_prune_rate = self.gradual_pruning_rate(self.steps, 0.0, self.sparsity,
+                                                                   self.initial_prune_time, self.final_prune_time)
+                    self.gradual_magnitude_pruning(current_prune_rate)
+                    self.print_status()
+            else:
+                if self.steps % self.update_frequency == 0:
+                    print('*********************************Dynamic Sparsity********************************')
+                    self.truncate_weights()
+                    self.print_nonzero_counts()
 
 
     def apply_mask(self):
@@ -456,4 +476,41 @@ class Masking(object):
 
         for name in self.masks.keys():
             torch.distributed.broadcast(self.masks[name], src=0, async_op=False)
+
+    def gradual_pruning_rate(self,
+            step: int,
+            initial_threshold: float,
+            final_threshold: float,
+            initial_time: int,
+            final_time: int,
+    ):
+        if step <= initial_time:
+            threshold = initial_threshold
+        elif step > final_time:
+            threshold = final_threshold
+        else:
+            mul_coeff = 1 - (step - initial_time) / (final_time - initial_time)
+            threshold = final_threshold + (initial_threshold - final_threshold) * (mul_coeff ** 3)
+
+        return threshold
+
+    def gradual_magnitude_pruning(self, current_pruning_rate):
+        weight_abs = []
+        for module in self.modules:
+            for name, weight in module.named_parameters():
+                if name not in self.masks: continue
+                weight_abs.append(torch.abs(weight))
+
+        # Gather all scores in a single vector and normalise
+        all_scores = torch.cat([torch.flatten(x) for x in weight_abs])
+        num_params_to_keep = int(len(all_scores) * (1 - current_pruning_rate))
+
+        threshold, _ = torch.topk(all_scores, num_params_to_keep, sorted=True)
+        acceptable_score = threshold[-1]
+
+        for module in self.modules:
+            for name, weight in module.named_parameters():
+                if name not in self.masks: continue
+                self.masks[name] = ((torch.abs(weight)) > acceptable_score).float().data.to(self.device)
+        self.apply_mask()
 
