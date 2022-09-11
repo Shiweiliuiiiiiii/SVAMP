@@ -17,4 +17,4 @@ saved_dir=/home/sliu/project_space/pruning_cfails/Math/gts/mawps-asdiv-a_svamp/d
 
 python -m src.main -mode train -gpu 0 -embedding roberta -emb_name roberta-base -embedding_size 768 -hidden_size 512 \
 -depth 2 -lr 0.001 -emb_lr 8e-6 -batch_size 8 -epochs 50 -dataset mawps-asdiv-a_svamp -full_cv -run_name run_mawps-asdiv-a_svamp \
---output_dir $saved_dir -save_model
+--output_dir /home/sliu/project_space/pruning_cfails/Math/gts/mawps-asdiv-a_svamp/dense/ -save_model -no-full_cv -results
