@@ -35,12 +35,14 @@ for method in all_methods:
                     if '5-fold avg acc score' in line:
                         results.append(100*float(line.split()[-1][1:-2]))
 
+
+
 robert_gm_before = results[:10]
 # robert_gm_after =
 robert_gm_rigl = results[10:20]
 robert_random_before = results[20:30]
-random_rigl = results[30:40]
-robert_random_rigl= results[40:50]
+robert_random_rigl = results[30:40]
+robert_snip= results[40:50]
 robert_lth = [80.27, 79.38, 77.32, 71.90, 65.08, 59.57, 56.86, 54.15, 54.81, 52.67]
 
 x_axis = range(10)
