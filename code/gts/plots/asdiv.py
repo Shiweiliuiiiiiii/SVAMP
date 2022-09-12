@@ -23,11 +23,11 @@ all_methods = sorted_nicely(output_files)
 
 results = []
 for method in all_methods:
-    method_dirs = os.path.join(results_dir, str(method))
-    method_sparsity = sorted_nicely(os.listdir(method_dirs))
+    if 'dense' not in all_methods:
+        method_dirs = os.path.join(results_dir, str(method))
+        method_sparsity = sorted_nicely(os.listdir(method_dirs))
 
-    for sparsity in method_sparsity:
-        if 'dense' not in sparsity:
+        for sparsity in method_sparsity:
             sparsity_dir = os.path.join(method_dirs, sparsity,'out', 'CV_results_cv_asdiv-a.json')
             with open(sparsity_dir) as file:
                 for line in file:
