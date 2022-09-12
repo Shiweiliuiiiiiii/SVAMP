@@ -29,7 +29,7 @@ for method in all_methods:
         method_sparsity = sorted_nicely(os.listdir(method_dirs))
 
         for sparsity in method_sparsity:
-            sparsity_dir = os.path.join(method_dirs, sparsity,'out', 'CV_results_cv_asdiv-a.json')
+            sparsity_dir = os.path.join(method_dirs, sparsity,'out', 'CV_results_cv_mawps.json')
             with open(sparsity_dir) as file:
                 for line in file:
                     if '5-fold avg acc score' in line:
