@@ -25,14 +25,14 @@ results = []
 for method in all_methods:
     method_dirs = os.path.join(results_dir, str(method))
     method_sparsity = sorted_nicely(os.listdir(method_dirs))
-    method_sparsity.pop('dense')
-    for sparsity in method_sparsity:
-        sparsity_dir = os.path.join(method_dirs, sparsity,'out', 'CV_results_cv_asdiv-a.json')
 
-        with open(sparsity_dir) as file:
-            for line in file:
-                if '5-fold avg acc score' in line:
-                    results(float(line.split()[-1][1:-2]))
+    for sparsity in method_sparsity:
+        if 'dense' is not in sparsity:
+            sparsity_dir = os.path.join(method_dirs, sparsity,'out', 'CV_results_cv_asdiv-a.json')
+            with open(sparsity_dir) as file:
+                for line in file:
+                    if '5-fold avg acc score' in line:
+                        results(float(line.split()[-1][1:-2]))
 
 print(results)
 
