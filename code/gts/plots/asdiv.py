@@ -25,6 +25,7 @@ results = []
 for method in all_methods:
     method_dirs = os.path.join(results_dir, str(method))
     method_sparsity = sorted_nicely(os.listdir(method_dirs))
+    method_sparsity.pop('dense')
     for sparsity in method_sparsity:
         sparsity_dir = os.path.join(method_dirs, sparsity,'out', 'CV_results_cv_asdiv-a.json')
 
