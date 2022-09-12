@@ -23,7 +23,7 @@ all_methods = sorted_nicely(output_files)
 
 results = []
 for method in all_methods:
-    if 'dense' not in method and 'gmp' not in method and 'imp' not in method and 'after' not in method and 'snip_rigl' not in method:
+    if 'dense' not in method and 'gmp' not in method and 'imp' not in method and 'after' not in method and 'snip' not in method:
         print(method)
         method_dirs = os.path.join(results_dir, str(method))
         method_sparsity = sorted_nicely(os.listdir(method_dirs))
