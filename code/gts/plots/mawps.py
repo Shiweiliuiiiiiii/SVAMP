@@ -14,7 +14,7 @@ def sorted_nicely(l):
     return sorted(l, key = alphanum_key)
 
 
-dense = [78.64]
+dense = [88.49]
 
 results_dir = "/home/sliu/project_space/pruning_cfails/Math/gts/mawps/"
 output_files = os.listdir(os.path.join(results_dir))
@@ -23,7 +23,7 @@ all_methods = sorted_nicely(output_files)
 
 results = []
 for method in all_methods:
-    if 'dense' not in method and 'gmp' not in method and 'imp' not in method and 'after' not in method and 'snip' not in method:
+    if 'dense' not in method and 'gmp' not in method and 'imp' not in method and 'after' not in method and 'snip' not in method and 'random_rigl' not in method:
         print(method)
         method_dirs = os.path.join(results_dir, str(method))
         method_sparsity = sorted_nicely(os.listdir(method_dirs))
@@ -43,7 +43,7 @@ robert_gm_rigl = results[10:20]
 robert_random_before = results[20:30]
 robert_random_rigl = results[30:40]
 robert_snip= results[40:50]
-robert_lth = [80.27, 79.38, 77.32, 71.90, 65.08, 59.57, 56.86, 54.15, 54.81, 52.67]
+robert_lth = [88.28, 88.43, 87.70, 86.97, 84.22, 83.12, 81.92, 81.41, 80.36, 80.73]
 
 x_axis = range(10)
 
