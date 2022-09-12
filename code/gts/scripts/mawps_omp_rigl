@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=gtsq_mawps_omp_rigl
+#SBATCH --job-name=gtsq_mawps_omp_rigl_1
 #SBATCH -p gpu
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
@@ -7,12 +7,12 @@
 #SBATCH --gpus=1
 #SBATCH -t 3-00:00:00
 #SBATCH --cpus-per-task=18
-#SBATCH -o gtsq_mawps_omp_rigl.out
+#SBATCH -o gtsq_mawps_omp_rigl_1.out
 
 source /home/sliu/miniconda3/etc/profile.d/conda.sh
 source activate prune_cry
 
-for sparsity in 0.2 0.36 0.488 0.590 0.672 0.738 0.791 0.8325 0.866 0.893
+for sparsity in 0.590 0.672 0.738 0.791 0.8325 0.866 0.893
 do
 saved_dir=/home/sliu/project_space/pruning_cfails/Math/gts/mawps/omp_rigl/$sparsity
 
