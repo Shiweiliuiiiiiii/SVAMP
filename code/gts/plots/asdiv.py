@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import os
+import os, re
 from matplotlib.pyplot import figure
 fig = figure(num=None, figsize=(8, 5), dpi=150, facecolor='w', edgecolor='k')
 fontsize = 15
