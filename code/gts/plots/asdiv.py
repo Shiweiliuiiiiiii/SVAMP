@@ -32,6 +32,7 @@ for method in all_methods:
             with open(sparsity_dir) as file:
                 for line in file:
                     if '5-fold avg acc score' in line:
+                        print(line)
                         results.append(float(line.split()[-1][1:-2]))
 
 print(results)
