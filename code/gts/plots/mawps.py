@@ -36,7 +36,6 @@ for method in all_methods:
                         results.append(100*float(line.split()[-1][1:-2]))
 
 
-
 robert_gm_before = results[:10]
 # robert_gm_after =
 robert_gm_rigl = results[10:20]
