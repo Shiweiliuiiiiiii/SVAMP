@@ -476,7 +476,7 @@ def main():
 		log_file = os.path.join(config.log_path, 'log.txt')
 
 		if config.results:
-			config.result_path = os.path.join(result_folder, 'val_results_{}.json'.format(config.dataset))
+			config.result_path = os.path.join(args.output_dir, result_folder, 'val_results_{}.json'.format(config.dataset))
 
 		if is_train:
 			create_save_directories(config.log_path)
