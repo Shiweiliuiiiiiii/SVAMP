@@ -715,6 +715,14 @@ def main():
 					loss_total += loss
 					print("Completed {} / {}...".format(idx, len(input_lengths)), end = '\r', flush = True)
 
+				# reset metric for GMP to avoid the best model is chosen before the target sparsity
+				if mask and args.sparse_mode == 'GMP' and mask.steps >= mask.final_prune_time:
+					max_val_acc = 0.0
+					max_train_acc = 0.0
+					eq_acc = 0.0
+					best_epoch = -1
+					min_train_loss = float('inf')
+
 				embedding_scheduler.step()
 				encoder_scheduler.step()
 				predict_scheduler.step()
