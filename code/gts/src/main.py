@@ -466,6 +466,7 @@ def main():
 		config.model_path = os.path.join(args.output_dir, model_folder, run_name)
 		config.board_path = os.path.join(args.output_dir, board_path, run_name)
 		config.outputs_path = os.path.join(args.output_dir, outputs_folder, run_name)
+		config.model_load_path = os.path.join(config.pretrained_dir, model_folder, run_name)
 
 		for file in [config.log_path, config.model_path, config.board_path, config.outputs_path]:
 			if not os.path.exists(file): os.makedirs(file)
@@ -568,6 +569,19 @@ def main():
 			# the embedding layer is only for generated number embeddings, operators, and paddings
 
 			logger.debug('Models Initialized')
+
+			if config.pretrained_dir != '':
+				logger.info('loading pretrained models from {}.'.format(config.model_load_path))
+
+				ckpt_path = os.path.join(config.model_load_path, 'model.pt')
+				checkpoint = torch.load(ckpt_path, map_location=lambda storage, loc: storage)
+				embedding.load_state_dict(checkpoint['embedding_state_dict'])
+				encoder.load_state_dict(checkpoint['encoder_state_dict'])
+				predict.load_state_dict(checkpoint['predict_state_dict'])
+				generate.load_state_dict(checkpoint['generate_state_dict'])
+				merge.load_state_dict(checkpoint['merge_state_dict'])
+
+
 			logger.info('Initializing Optimizers...')
 
 			embedding_optimizer = torch.optim.Adam(embedding.parameters(), lr=config.emb_lr, weight_decay=config.weight_decay)
