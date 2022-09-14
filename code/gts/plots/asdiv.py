@@ -37,13 +37,29 @@ for method in all_methods:
 
 
 
-robert_gm_before = results[:10]
-# robert_gm_after =
-robert_gm_rigl = results[10:20]
-robert_random_before = results[20:30]
-robert_random_rigl = results[30:40]
-robert_snip= results[40:50]
+
+# gmp
+# omp_after
+# omp_before
+# omp_rigl
+# random_after
+# random_before
+# random_rigl
+# snip
+# snip_rigl
+robert_gmp = results[:10]
+robert_gm_after = results[10:20]
+robert_gm_before = results[20:30]
+robert_gm_rigl = results[30:40]
+
+robert_random_after = results[40:50]
+robert_random_before = results[50:60]
+robert_random_rigl = results[60:70]
+robert_snip= results[70:80]
+robert_snip_rigl= results[80:90]
+
 robert_lth = [80.27, 79.38, 77.32, 71.90, 65.08, 59.57, 56.86, 54.15, 54.81, 52.67]
+
 
 x_axis = range(10)
 
@@ -51,14 +67,14 @@ x_axis = range(10)
 roberta_large = fig.add_subplot(1,1,1)
 roberta_large.plot(x_axis, dense*10,  '-o',   label='Dense',color='black',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_snip,  '-',   label='SNIP',color='blue',linewidth=linewidth, markersize=markersize, )
-# roberta_large.plot(x_axis, robert_gmp,  '-',   label='GMP',color='yellow',linewidth=linewidth, markersize=markersize, )
-# roberta_large.plot(x_axis, robert_snip_rigl,  '-',   label='SNIP+RIGL',color='blue',linewidth=linewidth, markersize=markersize, marker='^'  )
+roberta_large.plot(x_axis, robert_gmp,  '-',   label='GMP',color='yellow',linewidth=linewidth, markersize=markersize, )
+roberta_large.plot(x_axis, robert_snip_rigl,  '-',   label='SNIP+RIGL',color='blue',linewidth=linewidth, markersize=markersize, marker='^'  )
 roberta_large.plot(x_axis, robert_lth,  '-',   label='LTH',color='orange',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_gm_before,  '-',   label='OMP Before',color='green',linewidth=linewidth, markersize=markersize, )
-# roberta_large.plot(x_axis, robert_gm_after,  '--',   label='OMP After',color='green',linewidth=linewidth, markersize=markersize, )
+roberta_large.plot(x_axis, robert_gm_after,  '--',   label='OMP After',color='green',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_gm_rigl,  '-',   label='OMP+RIGL',color='green',linewidth=linewidth, markersize=markersize, marker='^' )
 roberta_large.plot(x_axis, robert_random_before,  '-',   label='Random Before',color='purple',linewidth=linewidth, markersize=markersize, )
-# roberta_large.plot(x_axis, robert_random_after,  '--',   label='Random After',color='purple',linewidth=linewidth, markersize=markersize, )
+roberta_large.plot(x_axis, robert_random_after,  '--',   label='Random After',color='purple',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_rigl,  '-',   label='Random+RIGL',color='purple',linewidth=linewidth, markersize=markersize, marker='^' )
 
 
