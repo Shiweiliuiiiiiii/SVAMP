@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os, re
 from matplotlib.pyplot import figure
-fig = figure(num=None, figsize=(19, 5.5), dpi=150, facecolor='w', edgecolor='k')
+fig = figure(num=None, figsize=(19, 6), dpi=150, facecolor='w', edgecolor='k')
 fontsize = 14
 Titlesize = 18
 markersize = 5
@@ -214,7 +214,7 @@ roberta_large.spines['top'].set_visible(False)
 
 # plt.tight_layout()
 fig.legend(loc='lower center', bbox_to_anchor=(0.0, 0.0, 1, 1), fancybox=False, shadow=False, ncol=4, fontsize=fontsize, frameon=False)
-fig.subplots_adjust(left=0.02 , bottom=0.22, right=0.98, top=0.95, wspace=0.15, hspace=0.2)
+fig.subplots_adjust(left=0.02 , bottom=0.3, right=0.98, top=0.95, wspace=0.2, hspace=0.2)
 
 plt.savefig('gts_no_omp_before.pdf')
 plt.show()
