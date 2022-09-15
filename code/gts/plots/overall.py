@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os, re
 from matplotlib.pyplot import figure
-fig = figure(num=None, figsize=(16, 9), dpi=150, facecolor='w', edgecolor='k')
+fig = figure(num=None, figsize=(16, 5), dpi=150, facecolor='w', edgecolor='k')
 fontsize = 12
 Titlesize = 15
 markersize = 4
@@ -88,7 +88,7 @@ roberta_large.spines['top'].set_visible(False)
 
 # mawps
 
-dense_mawps = [78.64]
+dense_mawps = [88.49]
 
 results_dir = "/home/sliu/project_space/pruning_cfails/Math/gts/mawps/"
 output_files = os.listdir(os.path.join(results_dir))
