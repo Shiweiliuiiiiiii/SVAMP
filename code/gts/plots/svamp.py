@@ -26,9 +26,9 @@ robert_snip =          [26.9, 26.6, 27.4, 26.2, 26.0, 25.6, 26.4, 25.8, 25.1, 26
 robert_lth =           [39.8, 40.1, 39.1, 35.7, 33.7, 25.6, 24.4, 23.6, 22.3, 21.3]
 robert_gmp =           [41.2, 38.9, 37.5, 33.0, 31.4, 31.6, 28.4, 27.5, 29.1, 30.1]
 
-
+robert_gm_after =      [40.9, 39.3, 39.3, 37.5, 29.3, 28.7, 29.9, 28.6, 29.1, 26.0]
 robert_random_before = [23.1, 26.2, 24.7, 27.0, 25.6, 24.6, 24.7, 24.1, 22.9, 21.9]
-robert_random_after  = [25.2, 21.4, 25.5, 25.7, 25.6, 25.3, 25.3, 24.2, 23.0, 22.6]
+robert_random_after  = [34.3, 29.6, 26.6, 26.9, 26.1, 24.5, 25.5, 23.7, 23.2, 20.6]
 robert_random_rigl =   [28.4, 21.5, 25.3, 27.5, 26.2, 24.7, 25.0, 23.3, 24.0, 22.6]
 
 x_axis = range(10)
@@ -37,8 +37,8 @@ x_axis = range(10)
 roberta_large = fig.add_subplot(1,1,1)
 roberta_large.plot(x_axis, dense*10,  '-o',   label='Dense model',color='black',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_lth,  '-o',   label='LTH (After)',color='orange',linewidth=linewidth, markersize=markersize, )
-# roberta_large.plot(x_axis, robert_gm_after,  '-o',   label='One-Shot LRR (After)',color='#77AC30',linewidth=linewidth, markersize=markersize, )
-# roberta_large.plot(x_axis, robert_random_after,  '-o',   label='Random LRR (After)',color='#0072BD',linewidth=linewidth, markersize=markersize, )
+roberta_large.plot(x_axis, robert_gm_after,  '-o',   label='One-Shot LRR (After)',color='#77AC30',linewidth=linewidth, markersize=markersize, )
+roberta_large.plot(x_axis, robert_random_after,  '-o',   label='Random LRR (After)',color='#0072BD',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_gmp,  '-o',   label='GMP (During)',color='magenta',linewidth=linewidth, markersize=markersize, )
 
 

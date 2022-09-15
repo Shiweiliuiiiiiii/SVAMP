@@ -295,6 +295,16 @@ def main():
 					loss_total += loss
 					print("Completed {} / {}...".format(idx, len(input_lengths)), end = '\r', flush = True)
 
+					if mask and args.sparse_mode == 'GMP' and mask.steps == mask.final_prune_time:
+						logger.info('clean historical metrics for GMP')
+						max_value_corr = 0
+						len_total_eval = 0
+						max_val_acc = 0.0
+						max_train_acc = 0.0
+						eq_acc = 0.0
+						best_epoch = -1
+						min_train_loss = float('inf')
+
 				embedding_scheduler.step()
 				encoder_scheduler.step()
 				predict_scheduler.step()
@@ -303,16 +313,6 @@ def main():
 
 				logger.debug('Training for epoch {} completed...\nTime Taken: {}'.format(epoch, time_since(time.time() - start)))
 
-
-				if mask and args.sparse_mode == 'GMP' and mask.steps >= mask.final_prune_time:
-					logger.info('clean historical metrics for GMP')
-					max_value_corr = 0
-					len_total_eval = 0
-					max_val_acc = 0.0
-					max_train_acc = 0.0
-					eq_acc = 0.0
-					best_epoch = -1
-					min_train_loss = float('inf')
 
 
 				if loss_total / len(input_lengths) < min_train_loss:
