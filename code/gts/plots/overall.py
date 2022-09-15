@@ -181,7 +181,7 @@ robert_random_after_svamp  = [34.3, 29.6, 26.6, 26.9, 26.1, 24.5, 25.5, 23.7, 23
 robert_random_rigl_svamp =   [28.4, 21.5, 25.3, 27.5, 26.2, 24.7, 25.0, 23.3, 24.0, 22.6]
 
 x_axis = range(10)
-roberta_large = fig.add_subplot(1,3,2)
+roberta_large = fig.add_subplot(1,3,3)
 roberta_large.plot(x_axis, dense_svamp*10,  '-o',color='black',linewidth=linewidth, markersize=markersize, )
 
 roberta_large.plot(x_axis, robert_snip_svamp,  '-o',color='#00FF00',linewidth=linewidth, markersize=markersize, )
