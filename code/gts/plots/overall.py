@@ -55,7 +55,7 @@ robert_lth_asdiv = [80.27, 79.38, 77.32, 71.90, 65.08, 59.57, 56.86, 54.15, 54.8
 
 
 x_axis = range(10)
-roberta_large = fig.add_subplot(1,3,1)
+roberta_large = fig.add_subplot(1,3,2)
 roberta_large.plot(x_axis, dense_asdiv*10,  '-o',   label='Dense model',color='black',linewidth=linewidth, markersize=markersize, )
 
 roberta_large.plot(x_axis, robert_snip_asdiv,  '-o',   label='SNIP (Before)',color='#00FF00',linewidth=linewidth, markersize=markersize, )
@@ -129,7 +129,7 @@ robert_omp_before_mawps = [87.97, 85.83, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1]
 robert_omp_rigl_mawps  = [87.45, 84.16, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1]
 
 
-roberta_large = fig.add_subplot(1,3,2)
+roberta_large = fig.add_subplot(1,3,1)
 roberta_large.plot(x_axis, dense_mawps*10,  '-o',color='black',linewidth=linewidth, markersize=markersize, )
 
 roberta_large.plot(x_axis, robert_snip_mawps,  '-o',color='#00FF00',linewidth=linewidth, markersize=markersize, )
@@ -213,7 +213,7 @@ roberta_large.spines['top'].set_visible(False)
 
 
 # plt.tight_layout()
-fig.legend(loc='lower center', bbox_to_anchor=(0.0, 0.0, 1, 1), fancybox=False, shadow=False, ncol=6, fontsize=fontsize, frameon=False)
+fig.legend(loc='lower center', bbox_to_anchor=(0.0, 0.0, 1, 1), fancybox=False, shadow=False, ncol=4, fontsize=fontsize, frameon=False)
 fig.subplots_adjust(left=0.05 , bottom=0.2, right=0.95, top=0.90, wspace=0.3, hspace=0.2)
 
 plt.savefig('gts_all.pdf')
