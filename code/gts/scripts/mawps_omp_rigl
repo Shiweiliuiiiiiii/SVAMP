@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=gtsq_mawps_omp_rigl_1
+#SBATCH --job-name=gt_mawps_omp_rigl_1
 #SBATCH -p gpu
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
@@ -7,7 +7,7 @@
 #SBATCH --gpus=1
 #SBATCH -t 3-00:00:00
 #SBATCH --cpus-per-task=18
-#SBATCH -o gtsq_mawps_omp_rigl_1.out
+#SBATCH -o gt_mawps_omp_rigl_1.out
 
 source /home/sliu/miniconda3/etc/profile.d/conda.sh
 source activate prune_cry

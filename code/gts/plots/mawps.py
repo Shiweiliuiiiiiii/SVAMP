@@ -23,7 +23,7 @@ all_methods = sorted_nicely(output_files)
 
 results = []
 for method in all_methods:
-    if 'dense' not in method and 'imp' not in method:
+    if 'dense' not in method and 'imp' not in method and 'omp_rigl' not in method and 'omp_before' not in method:
         print(method)
         method_dirs = os.path.join(results_dir, str(method))
         method_sparsity = sorted_nicely(os.listdir(method_dirs))
@@ -36,8 +36,6 @@ for method in all_methods:
                         results.append(100*float(line.split()[-1][1:-2]))
 
 
-
-
 # gmp
 # omp_after
 # omp_before
@@ -48,18 +46,17 @@ for method in all_methods:
 # snip
 # snip_rigl
 robert_gmp = results[:10]
-robert_gm_after = results[10:20]
-robert_gm_before = results[20:30]
-robert_gm_rigl = results[30:40]
+arobert_omp_after = results[10:20]
+robert_random_after = results[20:30]
+robert_random_before = results[30:40]
+robert_random_rigl = results[40:50]
 
-robert_random_after = results[40:50]
-robert_random_before = results[50:60]
-robert_random_rigl = results[60:70]
-robert_snip= results[70:80]
-robert_snip_rigl= results[80:90]
+robert_snip = results[50:60]
+robert_snip_rigl = results[60:70]
 
 robert_lth = [88.28, 88.43, 87.71, 86.98, 84.22, 83.13, 81.93, 81.41, 80.36, 80.73]
-a
+arobert_omp_before = [87.97, 85.83, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1]
+arobert_omp_rigl   = [87.45, 84.16, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1]
 
 x_axis = range(10)
 
@@ -70,20 +67,20 @@ roberta_large.plot(x_axis, robert_snip,  '-',   label='SNIP',color='blue',linewi
 # roberta_large.pl(x_axis, robert_gmp,  '-',   label='GMP',color='yellow',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_snip_rigl,  '-',   label='SNIP+RIGL',color='blue',linewidth=linewidth, markersize=markersize, marker='^'  )
 roberta_large.plot(x_axis, robert_lth,  '-',   label='LTH',color='orange',linewidth=linewidth, markersize=markersize, )
-# roberta_large.plot(x_axis, robert_gm_before,  '-',   label='OMP Before',color='green',linewidth=linewidth, markersize=markersize, )
+roberta_large.plot(x_axis, robert_gm_before,  '-',   label='OMP Before',color='green',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_gm_after,  '--',   label='OMP After',color='green',linewidth=linewidth, markersize=markersize, )
-# roberta_large.plot(x_axis, robert_gm_rigl,  '-',   label='OMP+RIGL',color='green',linewidth=linewidth, markersize=markersize, marker='^' )
+roberta_large.plot(x_axis, robert_gm_rigl,  '-',   label='OMP+RIGL',color='green',linewidth=linewidth, markersize=markersize, marker='^' )
 roberta_large.plot(x_axis, robert_random_before,  '-',   label='Random Before',color='purple',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_after,  '--',   label='Random After',color='purple',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_rigl,  '-',   label='Random+RIGL',color='purple',linewidth=linewidth, markersize=markersize, marker='^' )
 
 
-roberta_large.set_title('Roberta large on CommonsenseQA',fontsize=fontsize)
+roberta_large.set_title('GTS on MAWPS',fontsize=fontsize)
 roberta_large.set_xticks(range(10))
 roberta_large.set_xticklabels(np.array( [0.2, 0.36, 0.488, 0.590, 0.672, 0.738, 0.791, 0.8325, 0.866, 0.893]), fontsize=10 )
 
 roberta_large.set_ylabel('Accuracy', fontsize=fontsize)
 roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
 plt.legend()
-plt.savefig('gts_mawps.pdf')
+plt.savefig('gts_asdiv.png')
 plt.show()
