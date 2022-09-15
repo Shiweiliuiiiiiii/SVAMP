@@ -68,7 +68,7 @@ roberta_large.plot(x_axis, dense*10,  '-o',   label='Dense model',color='black',
 roberta_large.plot(x_axis, robert_lth,  '-o',   label='LTH (After)',color='orange',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_gm_after,  '-o',   label='One-Shot LRR (After)',color='#77AC30',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_after,  '-o',   label='Random LRR (After)',color='#0072BD',linewidth=linewidth, markersize=markersize, )
-roberta_large.plot(x_axis, robert_gmp,  '-o',   label='GMP (During)',color='magenta',linewidth=linewidth, markersize=markersize, )
+# roberta_large.plot(x_axis, robert_gmp,  '-o',   label='GMP (During)',color='magenta',linewidth=linewidth, markersize=markersize, )
 
 
 roberta_large.plot(x_axis, robert_snip,  '-o',   label='SNIP (Before)',color='#00FF00',linewidth=linewidth, markersize=markersize, )
