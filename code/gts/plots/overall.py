@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os, re
 from matplotlib.pyplot import figure
-fig = figure(num=None, figsize=(16, 4.5), dpi=150, facecolor='w', edgecolor='k')
+fig = figure(num=None, figsize=(19, 4.5), dpi=150, facecolor='w', edgecolor='k')
 fontsize = 12
 Titlesize = 15
 markersize = 4
@@ -71,7 +71,7 @@ roberta_large.plot(x_axis, robert_random_rigl_asdiv,  '--o',   label='Random+RIG
 
 
 roberta_large.set_title('GTS on ASDiv-A',fontsize=Titlesize)
-roberta_large.axes.get_xaxis().set_visible(False)
+# roberta_large.axes.get_xaxis().set_visible(False)
 roberta_large.set_ylabel('Accuracy [%]', fontsize=Titlesize)
 roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
 roberta_large.set_xticklabels([], rotation=45,fontsize=fontsize )
@@ -145,7 +145,7 @@ roberta_large.plot(x_axis, robert_random_rigl_mawps,  '--o',color='brown',linewi
 
 
 roberta_large.set_title('GTS on MAWPS',fontsize=Titlesize)
-roberta_large.axes.get_xaxis().set_visible(False)
+# roberta_large.axes.get_xaxis().set_visible(False)
 roberta_large.set_ylabel('Accuracy [%]', fontsize=Titlesize)
 roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
 roberta_large.set_xticklabels([], rotation=45,fontsize=fontsize )
@@ -197,7 +197,7 @@ roberta_large.plot(x_axis, robert_random_rigl_svamp,  '--o',color='brown',linewi
 
 
 roberta_large.set_title('GTS on SVAMP',fontsize=Titlesize)
-roberta_large.axes.get_xaxis().set_visible(False)
+# roberta_large.axes.get_xaxis().set_visible(False)
 roberta_large.set_ylabel('Accuracy [%]', fontsize=Titlesize)
 roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
 roberta_large.set_xticklabels([], rotation=45,fontsize=fontsize )
@@ -214,7 +214,7 @@ roberta_large.spines['top'].set_visible(False)
 
 # plt.tight_layout()
 fig.legend(loc='lower center', bbox_to_anchor=(0.0, 0.0, 1, 1), fancybox=False, shadow=False, ncol=4, fontsize=fontsize, frameon=False)
-fig.subplots_adjust(left=0.05 , bottom=0.2, right=0.95, top=0.90, wspace=0.3, hspace=0.2)
+fig.subplots_adjust(left=0.05 , bottom=0.2, right=0.95, top=0.90, wspace=0.15, hspace=0.2)
 
 plt.savefig('gts_no_omp_before.pdf')
 plt.show()
