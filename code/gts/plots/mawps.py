@@ -38,21 +38,17 @@ for method in all_methods:
 
 # gmp
 # omp_after
-# omp_before
-# omp_rigl
-# random_after
-# random_before
+# random_before actually is random after
 # random_rigl
-# snip
+# snip_before
 # snip_rigl
 robert_gmp = results[:10]
 arobert_omp_after = results[10:20]
 robert_random_after = results[20:30]
-robert_random_before = results[30:40]
-robert_random_rigl = results[40:50]
-
-robert_snip = results[50:60]
-robert_snip_rigl = results[60:70]
+robert_random_rigl = results[30:40]
+robert_snip = results[40:50]
+robert_snip_rigl = results[50:60]
+robert_random_before = [81.14, 79.32, 81.51, 82.5, 81.35, 81.30, 80.94, 80.36, 79.58, 80.05]
 
 robert_lth = [88.28, 88.43, 87.71, 86.98, 84.22, 83.13, 81.93, 81.41, 80.36, 80.73]
 arobert_omp_before = [87.97, 85.83, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1]
@@ -64,7 +60,7 @@ x_axis = range(10)
 roberta_large = fig.add_subplot(1,1,1)
 roberta_large.plot(x_axis, dense*10,  '-o',   label='Dense',color='black',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_snip,  '-',   label='SNIP',color='blue',linewidth=linewidth, markersize=markersize, )
-# roberta_large.pl(x_axis, robert_gmp,  '-',   label='GMP',color='yellow',linewidth=linewidth, markersize=markersize, )
+# roberta_large.plot(x_axis, robert_gmp,  '-',   label='GMP',color='yellow',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_snip_rigl,  '-',   label='SNIP+RIGL',color='blue',linewidth=linewidth, markersize=markersize, marker='^'  )
 roberta_large.plot(x_axis, robert_lth,  '-',   label='LTH',color='orange',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_gm_before,  '-',   label='OMP Before',color='green',linewidth=linewidth, markersize=markersize, )
