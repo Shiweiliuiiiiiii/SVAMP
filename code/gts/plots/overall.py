@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os, re
 from matplotlib.pyplot import figure
-fig = figure(num=None, figsize=(16, 4), dpi=150, facecolor='w', edgecolor='k')
+fig = figure(num=None, figsize=(16, 4.5), dpi=150, facecolor='w', edgecolor='k')
 fontsize = 12
 Titlesize = 15
 markersize = 4
