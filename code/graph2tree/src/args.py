@@ -104,5 +104,10 @@ def build_parser():
 	parser.add_argument('--imp_iters', type=int, default=11, help='how many iterations for IMP')
 
 	parser.add_argument('--output_dir', default='', type=str, required=True, help='Model Saved Path, Output Directory')
-	
+	parser.add_argument('--pretrained_dir', default='', type=str, help='Path of pretrained models')
+
+	# GMP
+	parser.add_argument('--sparse_mode', type=str, default='fix', help='method name: DST, GraNet, GraNet_uniform, GMP, GMO_uniform')
+	parser.add_argument('--initial_prune_time', type=float, default=0.1, help='the starting time for gradual pruning.')
+	parser.add_argument('--final_prune_time', type=int, default=0.8, help='the ending time for gradual pruning.')
 	return parser

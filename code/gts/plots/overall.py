@@ -5,8 +5,8 @@ from matplotlib.pyplot import figure
 fig = figure(num=None, figsize=(19, 6), dpi=150, facecolor='w', edgecolor='k')
 fontsize = 14
 Titlesize = 18
-markersize = 5
-linewidth = 1.8
+markersize = 7
+linewidth = 2.2
 
 def sorted_nicely(l):
     """ Sort the given iterable in the way that humans expect."""
