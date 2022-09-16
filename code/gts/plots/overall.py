@@ -71,6 +71,7 @@ roberta_large.plot(x_axis, robert_gm_rigl_asdiv,  '--o',   label='OMP+RIGL (Befo
 
 
 roberta_large.set_title('GTS on ASDiv-A',fontsize=Titlesize)
+roberta_large.set_xticks(range(10))
 # roberta_large.axes.get_xaxis().set_visible(False)
 roberta_large.set_ylabel('Accuracy [%]', fontsize=Titlesize)
 roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
@@ -145,6 +146,7 @@ roberta_large.plot(x_axis, robert_omp_rigl_mawps,  '--o',color='#bcbd22',linewid
 
 
 roberta_large.set_title('GTS on MAWPS',fontsize=Titlesize)
+roberta_large.set_xticks(range(10))
 # roberta_large.axes.get_xaxis().set_visible(False)
 roberta_large.set_ylabel('Accuracy [%]', fontsize=Titlesize)
 roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
@@ -197,6 +199,7 @@ roberta_large.plot(x_axis, robert_gm_rigl_svamp,  '--o',color='#bcbd22',linewidt
 
 
 roberta_large.set_title('GTS on SVAMP',fontsize=Titlesize)
+roberta_large.set_xticks(range(10))
 # roberta_large.axes.get_xaxis().set_visible(False)
 roberta_large.set_ylabel('Accuracy [%]', fontsize=Titlesize)
 roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
