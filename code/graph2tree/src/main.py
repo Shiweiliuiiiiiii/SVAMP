@@ -237,8 +237,7 @@ def main():
 			if args.sparse:
 
 				modules = [embedding, encoder, predict, generate, merge]
-				input_batches, input_lengths, output_batches, output_lengths, nums_batches, num_stack_batches, num_pos_batches, num_size_batches = prepare_train_batch(
-					train_pairs, config.batch_size)
+				input_batches, input_lengths, output_batches, output_lengths, nums_batches, num_stack_batches, num_pos_batches, num_size_batches, num_value_batches, graph_batches, group_batches = prepare_train_batch(train_pairs, config.batch_size)
 
 				decay = CosineDecay(args.prune_rate, int(args.epochs * len(output_lengths)))
 				mask = Masking(None, prune_rate_decay=decay, prune_rate=args.prune_rate,
@@ -652,8 +651,7 @@ def main():
 			if args.sparse:
 
 				modules = [embedding, encoder, predict, generate, merge]
-				input_batches, input_lengths, output_batches, output_lengths, nums_batches, num_stack_batches, num_pos_batches, num_size_batches = prepare_train_batch(
-					train_pairs, config.batch_size)
+				input_batches, input_lengths, output_batches, output_lengths, nums_batches, num_stack_batches, num_pos_batches, num_size_batches, num_value_batches, graph_batches, group_batches = prepare_train_batch(train_pairs, config.batch_size)
 
 				decay = CosineDecay(args.prune_rate, int(args.epochs * len(output_lengths)))
 				mask = Masking(None, prune_rate_decay=decay, prune_rate=args.prune_rate,
