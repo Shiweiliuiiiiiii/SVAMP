@@ -645,7 +645,7 @@ class TreeEmbedding:  # the class save the tree
 
 def train_tree(config, input_batch, input_length, target_batch, target_length, nums_stack_batch, num_size_batch, num_value_batch, group_batch, generate_nums,
 			   embedding, encoder, predict, generate, merge, embedding_optimizer, encoder_optimizer, predict_optimizer, generate_optimizer,
-			   merge_optimizer, input_lang, output_lang, num_pos, batch_graph, english=False):
+			   merge_optimizer, input_lang, output_lang, num_pos, batch_graph, english=False, mask=None):
 	num_mask = []
 	max_num_size = max(num_size_batch) + len(generate_nums)
 	for i in num_size_batch:
@@ -800,6 +800,7 @@ def train_tree(config, input_batch, input_length, target_batch, target_length, n
 	predict_optimizer.step()
 	generate_optimizer.step()
 	merge_optimizer.step()
+	if mask: mask.step()
 	return loss.item()  # , loss_0.item(), loss_1.item()
 
 
