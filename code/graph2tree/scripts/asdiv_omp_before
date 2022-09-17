@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=gts_asdiv_omg_before
+#SBATCH --job-name=g2t_asdiv_omg_before
 #SBATCH -p gpu
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
@@ -7,7 +7,7 @@
 #SBATCH --gpus=1
 #SBATCH -t 3-00:00:00
 #SBATCH --cpus-per-task=18
-#SBATCH -o gts_asdiv_omg_before.out
+#SBATCH -o g2t_asdiv_omg_before.out
 
 source /home/sliu/miniconda3/etc/profile.d/conda.sh
 source activate prune_cry
