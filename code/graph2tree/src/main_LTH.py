@@ -610,6 +610,13 @@ def main():
 				# the embedding layer is  only for generated number embeddings, operators, and paddings
 
 				logger.debug('Models Initialized')
+
+				if iter == 0:
+					logger.debug('Saving Initializations')
+					save_initialization(embedding, encoder, predict, generate, merge, args, logger)
+
+
+
 				logger.info('Initializing Optimizers...')
 
 				embedding_optimizer = torch.optim.Adam(embedding.parameters(), lr=config.emb_lr, weight_decay=config.weight_decay)
