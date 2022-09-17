@@ -262,7 +262,7 @@ def main():
 					loss = train_tree(
 						config, input_batches[idx], input_lengths[idx], output_batches[idx], output_lengths[idx],
 						num_stack_batches[idx], num_size_batches[idx], num_value_batches[idx], group_batches[idx],
-						generate_num_ids, embedding, encoder, predict, generate, merge,
+						generate_num_ids, embedding_copy, encoder_copy, predict_copy, generate_copy, merge_copy,
 						embedding_optimizer, encoder_optimizer, predict_optimizer, generate_optimizer, merge_optimizer,
 						input_lang, output_lang,
 						num_pos_batches[idx], graph_batches[idx])
@@ -676,7 +676,7 @@ def main():
 					loss = train_tree(
 						config, input_batches[idx], input_lengths[idx], output_batches[idx], output_lengths[idx],
 						num_stack_batches[idx], num_size_batches[idx], num_value_batches[idx], group_batches[idx],
-						generate_num_ids, embedding, encoder, predict, generate, merge,
+						generate_num_ids, embedding_copy, encoder_copy, predict_copy, generate_copy, merge_copy,
 						embedding_optimizer, encoder_optimizer, predict_optimizer, generate_optimizer, merge_optimizer,
 						input_lang, output_lang,
 						num_pos_batches[idx], graph_batches[idx])
