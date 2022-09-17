@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=graph2tree_asdiv_full_dense
+#SBATCH --job-name=gt2_asdiv_full_dense
 #SBATCH -p gpu
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
@@ -7,7 +7,7 @@
 #SBATCH --gpus=1
 #SBATCH -t 0-12:00:00
 #SBATCH --cpus-per-task=18
-#SBATCH -o graph2tree_asdiv_full_dense.out
+#SBATCH -o gt2_asdiv_full_dense.out
 
 source /home/sliu/miniconda3/etc/profile.d/conda.sh
 source activate prune_cry
