@@ -155,7 +155,7 @@ def main():
 				log_file = os.path.join(config.log_path, 'log.txt')
 
 				if config.results:
-					config.result_path = os.path.join(result_folder, 'val_results_{}.json'.format(config.dataset))
+					config.result_path = os.path.join(config.outputs_path, 'val_results_{}.json'.format(config.dataset))
 
 
 				logger = get_logger(run_name, log_file, logging.DEBUG)
@@ -534,7 +534,7 @@ def main():
 		log_file = os.path.join(config.log_path, 'log.txt')
 
 		if config.results:
-			config.result_path = os.path.join(args.imp_dir, 'val_results_{}.json'.format(config.dataset))
+			config.result_path = os.path.join(config.outputs_path, 'val_results_{}.json'.format(config.dataset))
 
 
 		logger = get_logger(run_name, log_file, logging.DEBUG)
