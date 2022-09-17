@@ -5,7 +5,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --gpus-per-node=1
 #SBATCH --gpus=1
-#SBATCH -t 4-00:00:00
+#SBATCH -t 1-00:00:00
 #SBATCH --cpus-per-task=18
 #SBATCH -o g2t_mawps_imp.out
 

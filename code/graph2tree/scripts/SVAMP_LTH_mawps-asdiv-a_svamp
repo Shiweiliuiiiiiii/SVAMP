@@ -5,7 +5,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --gpus-per-node=1
 #SBATCH --gpus=1
-#SBATCH -t 4-00:00:00
+#SBATCH -t 1-00:00:00
 #SBATCH --cpus-per-task=18
 #SBATCH -o g2t_svamp_imp_mawps-asdiv-a_svamp.out
 
@@ -17,7 +17,7 @@ do
 saved_dir=/home/sliu/project_space/pruning_cfails/Math/g2t/mawps-asdiv-a_svamp/imp/$sparsity
 
 python -m src.main -mode train -gpu 0 -embedding roberta -emb_name roberta-base -embedding_size 768 -hidden_size 384 \
--depth 2 -lr 8e-4 -emb_lr 1e-5 -batch_size 8 -epochs 50 -dataset mawps-asdiv-a_svamp -run_name graph2tree_run_mawps-asdiv-a_svamp \
+-depth 2 -lr 8e-4 -emb_lr 1e-5 -batch_size 8 -epochs 50 -dataset mawps-asdiv-a_svampc -run_name graph2tree_run_mawps-asdiv-a_svamp \
 --fix --sparse_init iterative_gm --sparsity $sparsity --sparse --output_dir $saved_dir -save_model -no-full_cv -results
 
 done
