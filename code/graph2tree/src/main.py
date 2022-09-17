@@ -119,7 +119,7 @@ def main():
 			log_file = os.path.join(config.log_path, 'log.txt')
 
 			if config.results:
-				config.result_path = os.path.join(args.output_dir, outputs_folder, 'val_results_{}.json'.format(config.dataset))
+				config.result_path = os.path.join(config.outputs_path, 'val_results_{}.json'.format(config.dataset))
 
 			create_save_directories(config.log_path)
 			create_save_directories(config.model_path)
@@ -515,7 +515,7 @@ def main():
 		log_file = os.path.join(config.log_path, 'log.txt')
 
 		if config.results:
-			config.result_path = os.path.join(args.output_dir, outputs_folder, 'val_results_{}.json'.format(config.dataset))
+			config.result_path = os.path.join(args.outputs_path, 'val_results_{}.json'.format(config.dataset))
 
 		if is_train:
 			create_save_directories(config.log_path)
