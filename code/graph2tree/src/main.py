@@ -259,13 +259,13 @@ def main():
 					modules_copy = [embedding_copy, encoder_copy, predict_copy, generate_copy, merge_copy]
 
 					idx = 0
-					loss_snip = train_tree(
+					loss = train_tree(
 						config, input_batches[idx], input_lengths[idx], output_batches[idx], output_lengths[idx],
-						num_stack_batches[idx], num_size_batches[idx], generate_num_ids, embedding_copy, encoder_copy,
-						predict_copy, generate_copy, merge_copy,
+						num_stack_batches[idx], num_size_batches[idx], num_value_batches[idx], group_batches[idx],
+						generate_num_ids, embedding, encoder, predict, generate, merge,
 						embedding_optimizer, encoder_optimizer, predict_optimizer, generate_optimizer, merge_optimizer,
 						input_lang, output_lang,
-						num_pos_batches[idx], mask=None)
+						num_pos_batches[idx], graph_batches[idx])
 					# torch.nn.utils.clip_grad_norm_(need_optimized_parameters, args.max_grad_norm)
 
 					grads_abs = []
@@ -673,13 +673,13 @@ def main():
 					modules_copy = [embedding_copy, encoder_copy, predict_copy, generate_copy, merge_copy]
 
 					idx = 0
-					loss_snip = train_tree(
+					loss = train_tree(
 						config, input_batches[idx], input_lengths[idx], output_batches[idx], output_lengths[idx],
-						num_stack_batches[idx], num_size_batches[idx], generate_num_ids, embedding_copy, encoder_copy,
-						predict_copy, generate_copy, merge_copy,
+						num_stack_batches[idx], num_size_batches[idx], num_value_batches[idx], group_batches[idx],
+						generate_num_ids, embedding, encoder, predict, generate, merge,
 						embedding_optimizer, encoder_optimizer, predict_optimizer, generate_optimizer, merge_optimizer,
 						input_lang, output_lang,
-						num_pos_batches[idx], mask=None)
+						num_pos_batches[idx], graph_batches[idx])
 					# torch.nn.utils.clip_grad_norm_(need_optimized_parameters, args.max_grad_norm)
 
 					grads_abs = []
