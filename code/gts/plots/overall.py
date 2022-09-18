@@ -39,17 +39,16 @@ for method in all_methods:
                     if '5-fold avg acc score' in line:
                         results_sdiv.append(100*float(line.split()[-1][1:-2]))
 
+print(np.array(results_sdiv).reshape(10,-1))
 robert_gmp_asdiv = [77.24, 78.55, 78.23, 75.35, 69.60, 65.57, 66.56, 67.63, 67.94, 67.79]
 robert_gm_after_asdiv = results_sdiv[10:20]
-print(robert_gm_after_asdiv)
 robert_gm_before_asdiv = results_sdiv[20:30]
-print(robert_gm_before_asdiv)
 robert_gm_rigl_asdiv = results_sdiv[30:40]
 
 robert_random_after_asdiv = results_sdiv[40:50]
-print(robert_random_after_asdiv)
+# print(robert_random_after_asdiv)
 robert_random_before_asdiv = results_sdiv[50:60]
-print(robert_random_before_asdiv)
+# print(robert_random_before_asdiv)
 robert_random_rigl_asdiv = results_sdiv[60:70]
 robert_snip_asdiv= results_sdiv[70:80]
 robert_snip_rigl_asdiv= results_sdiv[80:90]
