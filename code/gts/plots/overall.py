@@ -47,6 +47,7 @@ robert_gm_rigl_asdiv = results_sdiv[30:40]
 robert_random_after_asdiv = results_sdiv[40:50]
 print(robert_random_after_asdiv)
 robert_random_before_asdiv = results_sdiv[50:60]
+print(robert_random_before_asdiv)
 robert_random_rigl_asdiv = results_sdiv[60:70]
 robert_snip_asdiv= results_sdiv[70:80]
 robert_snip_rigl_asdiv= results_sdiv[80:90]
