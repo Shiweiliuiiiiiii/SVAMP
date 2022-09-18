@@ -28,7 +28,7 @@ all_methods = sorted_nicely(output_files)
 results_sdiv = []
 for method in all_methods:
     if 'dense' not in method and 'imp' not in method:
-        # print(method)
+        print(method)
         method_dirs = os.path.join(results_dir, str(method))
         method_sparsity = sorted_nicely(os.listdir(method_dirs))
 
@@ -100,7 +100,7 @@ all_methods = sorted_nicely(output_files)
 results = []
 for method in all_methods:
     if 'dense' not in method and 'imp' not in method and 'omp_rigl' not in method and 'omp_before' not in method:
-        print(method)
+        # print(method)
         method_dirs = os.path.join(results_dir, str(method))
         method_sparsity = sorted_nicely(os.listdir(method_dirs))
 
