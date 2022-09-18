@@ -117,7 +117,7 @@ for method in all_methods:
 # random_rigl
 # snip_before
 # snip_rigl
-robert_gmp_mawps = [86.67, 86.77, 86.77, 86.56, 85.16, 84.53, 0.791, 0.791, 0.791, 0.791]
+robert_gmp_mawps = [86.67, 86.77, 86.77, 86.56, 85.16, 84.53, 83.33, 83.33,83.33,83.33]
 robert_omp_after_mawps = results[10:20]
 robert_random_after_mawps = results[20:30]
 robert_random_rigl_mawps = results[30:40]
@@ -193,7 +193,7 @@ roberta_large.plot(x_axis, robert_gm_after_svamp,  '-o',color='#00BFFF',linewidt
 roberta_large.plot(x_axis, robert_random_before_svamp,  '-o',color='brown',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_after_svamp,  '-o',color='#0072BD',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_rigl_svamp,  '--o',color='brown',linewidth=linewidth, markersize=markersize)
-roberta_large.plot(x_axis, robert_gmp_asdiv,  '-o', color='magenta',linewidth=linewidth, markersize=markersize, )
+roberta_large.plot(x_axis, robert_gmp_svamp,  '-o', color='magenta',linewidth=linewidth, markersize=markersize, )
 # roberta_large.plot(x_axis, robert_gm_before_svamp,  '-o' ,color='#bcbd22',linewidth=linewidth, markersize=markersize, )
 # roberta_large.plot(x_axis, robert_gm_rigl_svamp,  '--o',color='#bcbd22',linewidth=linewidth, markersize=markersize )
 
