@@ -41,7 +41,9 @@ for method in all_methods:
 
 robert_gmp_asdiv = [77.24, 78.55, 78.23, 75.35, 69.60, 65.57, 66.56, 67.63, 67.94, 67.79]
 robert_gm_after_asdiv = results_sdiv[10:20]
+print(robert_gm_after_asdiv)
 robert_gm_before_asdiv = results_sdiv[20:30]
+print(robert_gm_before_asdiv)
 robert_gm_rigl_asdiv = results_sdiv[30:40]
 
 robert_random_after_asdiv = results_sdiv[40:50]
