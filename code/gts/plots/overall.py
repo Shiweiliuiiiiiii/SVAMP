@@ -117,7 +117,7 @@ for method in all_methods:
 # random_rigl
 # snip_before
 # snip_rigl
-robert_gmp_mawps = [86.67, 86.77, 86.77, 86.56, 85.16, 84.53, 0.791, , 0.791, 0.791, 0.791]
+robert_gmp_mawps = [86.67, 86.77, 86.77, 86.56, 85.16, 84.53, 0.791, 0.791, 0.791, 0.791]
 robert_omp_after_mawps = results[10:20]
 robert_random_after_mawps = results[20:30]
 robert_random_rigl_mawps = results[30:40]
