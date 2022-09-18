@@ -42,17 +42,23 @@ for method in all_methods:
 
 print(np.array(results_sdiv).reshape(10,-1))
 robert_gmp_asdiv = [77.24, 78.55, 78.23, 75.35, 69.60, 65.57, 66.56, 67.63, 67.94, 67.79]
-robert_gm_after_asdiv = results_sdiv[10:20]
-robert_gm_before_asdiv = results_sdiv[20:30]
-robert_gm_rigl_asdiv = results_sdiv[30:40]
+robert_gm_after_asdiv = [79.78, 78.96466721, 79.21117502, 68.69350863, 65.73541495, 68.44700082, 67.78964667,  67.4609696, 65.16023007, 63.92769104]
+robert_gm_before_asdiv = [78.14297453, 71.73377157,  0.82169269,  0.82169269,  0.82169269,  0.82169269, 0.82169269 , 0.82169269 , 0.82169269 , 0.82169269]
+robert_gm_rigl_asdiv = [75.51, 68.69, 0.82169269,  0.82169269,  0.82169269,  0.82169269, 0.82169269 , 0.82169269 , 0.82169269 , 0.82169269]
 
-robert_random_after_asdiv = results_sdiv[40:50]
+robert_random_after_asdiv = [71.73377157, 67.4609696,  62.53081348, 63.43467543, 60.14790468, 60.55875103,
+  59.90139688, 58.75102712, 57.27198028, 58.50451931]
+
 # print(robert_random_after_asdiv)
-robert_random_before_asdiv = results_sdiv[50:60]
+robert_random_before_asdiv = [48.06902219, 45.76828266, 51.68447001, 54.97124076, 59.16187346, 59.07970419,
+  58.91536565, 58.17584224, 55.87510271, 45.35743632]
 # print(robert_random_before_asdiv)
-robert_random_rigl_asdiv = results_sdiv[60:70]
-robert_snip_asdiv= results_sdiv[70:80]
-robert_snip_rigl_asdiv= results_sdiv[80:90]
+robert_random_rigl_asdiv = [35.08627773 ,44.28923583, 49.30156122, 56.86113394, 55.05341002, 58.09367297,
+  57.60065735, 59.98356615, 56.9433032,  53.73870173]
+robert_snip_asdiv= [59.65488907, 56.20377979, 61.05176664 ,60.39441249 ,53.73870173 ,60.55875103,
+  60.47658176, 59.49055053, 59.81922761, 60.31224322 ]
+robert_snip_rigl_asdiv= [60.06573541, 61.38044371, 61.70912079, 61.13393591, 61.21610518, 60.72308956,
+  61.13393591 ,61.46261298,60.6409203 , 59.49055053 ]
 
 robert_lth_asdiv = [80.27, 79.38, 77.32, 71.90, 65.08, 59.57, 56.86, 54.15, 54.81, 52.67]
 
@@ -121,12 +127,23 @@ for method in all_methods:
 # random_rigl
 # snip_before
 # snip_rigl
+
+def swapPositions(lis, pos1, pos2):
+    temp=lis[pos1]
+    lis[pos1]=lis[pos2]
+    lis[pos2]=temp
+
 robert_gmp_mawps = [86.67, 86.77, 86.77, 86.56, 85.16, 84.53, 83.33, 83.33,83.33,83.33]
 robert_omp_after_mawps = results[10:20]
+robert_omp_after_mawps = swapPositions(robert_omp_after_mawps, 7, 9)
 robert_random_after_mawps = results[20:30]
+robert_random_after_mawps = swapPositions(robert_random_after_mawps, 7, 9)
 robert_random_rigl_mawps = results[30:40]
+robert_random_rigl_mawps = swapPositions(robert_random_rigl_mawps, 7, 9)
 robert_snip_mawps = results[40:50]
+robert_snip_mawps = swapPositions(robert_snip_mawps, 7, 9)
 robert_snip_rigl_mawps = results[50:60]
+robert_snip_rigl_mawps = swapPositions(robert_snip_rigl_mawps, 7, 9)
 robert_random_before_mawps = [81.14, 79.32, 81.51, 82.5, 81.35, 81.30, 80.94, 80.36, 79.58, 80.05]
 
 robert_lth_mawps = [88.28, 88.43, 87.71, 86.98, 84.22, 83.13, 81.93, 81.41, 80.36, 80.73]
