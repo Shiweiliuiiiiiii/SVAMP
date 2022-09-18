@@ -15,7 +15,7 @@ def sorted_nicely(l):
     return sorted(l, key = alphanum_key)
 
 
-
+x_axis = range(10)
 
 # mawps
 
@@ -152,7 +152,7 @@ robert_lth_asdiv = [80.27, 79.38, 77.32, 71.90, 65.08, 59.57, 56.86, 54.15, 54.8
 
 
 
-x_axis = range(10)
+
 roberta_large = fig.add_subplot(1,3,2)
 roberta_large.plot(x_axis, dense_asdiv*10,  '-o',   label='Dense model',color='black',linewidth=linewidth, markersize=markersize, )
 
