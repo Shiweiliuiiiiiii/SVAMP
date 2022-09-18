@@ -39,7 +39,7 @@ for method in all_methods:
                     if '5-fold avg acc score' in line:
                         results.append(100*float(line.split()[-1][1:-2]))
 
-robert_gmp_asdiv = [77.24, 78.55, 78.23, 75.35, 69.60, 65.57, 66.56, 67.63, 67.94, 67,79]
+robert_gmp_asdiv = [77.24, 78.55, 78.23, 75.35, 69.60, 65.57, 66.56, 67.63, 67.94, 67.79]
 robert_gm_after_asdiv = results[10:20]
 robert_gm_before_asdiv = results[20:30]
 robert_gm_rigl_asdiv = results[30:40]
