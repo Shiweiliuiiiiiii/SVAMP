@@ -25,10 +25,10 @@ output_files = os.listdir(os.path.join(results_dir))
 all_methods = sorted_nicely(output_files)
 
 
-results = []
+results_sdiv = []
 for method in all_methods:
     if 'dense' not in method and 'imp' not in method:
-        print(method)
+        # print(method)
         method_dirs = os.path.join(results_dir, str(method))
         method_sparsity = sorted_nicely(os.listdir(method_dirs))
 
@@ -37,18 +37,18 @@ for method in all_methods:
             with open(sparsity_dir) as file:
                 for line in file:
                     if '5-fold avg acc score' in line:
-                        results.append(100*float(line.split()[-1][1:-2]))
+                        results_sdiv.append(100*float(line.split()[-1][1:-2]))
 
 robert_gmp_asdiv = [77.24, 78.55, 78.23, 75.35, 69.60, 65.57, 66.56, 67.63, 67.94, 67.79]
-robert_gm_after_asdiv = results[10:20]
-robert_gm_before_asdiv = results[20:30]
-robert_gm_rigl_asdiv = results[30:40]
+robert_gm_after_asdiv = results_sdiv[10:20]
+robert_gm_before_asdiv = results_sdiv[20:30]
+robert_gm_rigl_asdiv = results_sdiv[30:40]
 
-robert_random_after_asdiv = results[40:50]
-robert_random_before_asdiv = results[50:60]
-robert_random_rigl_asdiv = results[60:70]
-robert_snip_asdiv= results[70:80]
-robert_snip_rigl_asdiv= results[80:90]
+robert_random_after_asdiv = results_sdiv[40:50]
+robert_random_before_asdiv = results_sdiv[50:60]
+robert_random_rigl_asdiv = results_sdiv[60:70]
+robert_snip_asdiv= results_sdiv[70:80]
+robert_snip_rigl_asdiv= results_sdiv[80:90]
 
 robert_lth_asdiv = [80.27, 79.38, 77.32, 71.90, 65.08, 59.57, 56.86, 54.15, 54.81, 52.67]
 
