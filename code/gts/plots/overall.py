@@ -222,7 +222,7 @@ roberta_large.plot(x_axis, robert_gmp_svamp,  '-o', color='magenta',linewidth=li
 
 roberta_large.set_title('GTS on SVAMP',fontsize=Titlesize)
 roberta_large.set_xticks(range(10))
-# roberta_large.axes.get_xaxis().set_visible(False)
+roberta_large.axes.set_ylabel().set_visible(True)
 roberta_large.set_ylabel('Accuracy [%]', fontsize=Titlesize)
 roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
 roberta_large.set_xticklabels([], rotation=45,fontsize=fontsize )
