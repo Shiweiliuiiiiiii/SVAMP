@@ -18,7 +18,7 @@ saved_dir=/home/sliu/project_space/pruning_cfails/Math/g2t/gmp/$sparsity
 
 python -m src.main -mode train -gpu 0 -embedding roberta -emb_name roberta-base -embedding_size 768 -hidden_size 384 \
 -depth 2 -lr 8e-4 -emb_lr 1e-5 -batch_size 8 -epochs 50 -dataset cv_asdiv-a -full_cv -run_name graph2tree_run_cv_asdiv-a \
---sparse_init dense --sparsity $sparsity --sparse --output_dir $saved_dir  --seed 1 --final_prune_time 0.2 \
+--sparse_init dense --sparsity $sparsity --sparse --output_dir $saved_dir  -seed 1 --final_prune_time 0.2 \
 --prune magnitude --prune_rate 0.5 --growth gradient --update_frequency 1000 --redistribution none --sparse_mode GMP -no-save_model
 
 done
