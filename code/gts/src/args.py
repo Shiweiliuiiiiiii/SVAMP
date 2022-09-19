@@ -109,5 +109,5 @@ def build_parser():
 	# GMP
 	parser.add_argument('--sparse_mode', type=str, default='fix',help='method name: DST, GraNet, GraNet_uniform, GMP, GMO_uniform')
 	parser.add_argument('--initial_prune_time', type=float, default=0.1, help='the starting time for gradual pruning.')
-	parser.add_argument('--final_prune_time', type=int, default=0.8, help='the ending time for gradual pruning.')
+	parser.add_argument('--final_prune_time', type=float, default=0.8, help='the ending time for gradual pruning.')
 	return parser
