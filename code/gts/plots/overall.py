@@ -54,7 +54,7 @@ def swapPositions(lis, pos1, pos2):
     lis[pos2]=temp
     return lis
 
-robert_gmp_mawps = [86.67, 86.77, 86.77, 86.56, 85.16, 84.53, 83.33, 83.33,83.33,83.33]
+robert_gmp_mawps = [86.67, 86.77, 86.77, 86.56, 85.16, 84.53, 84.38, 83.49, 84,47, 84.37]
 robert_omp_after_mawps = results[10:20]
 robert_omp_after_mawps = swapPositions(robert_omp_after_mawps, 7, 9)
 robert_random_after_mawps = results[20:30]
