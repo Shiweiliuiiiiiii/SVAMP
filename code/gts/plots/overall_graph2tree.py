@@ -19,57 +19,23 @@ x_axis = range(10)
 
 # mawps
 
-dense_mawps = [88.49]
+dense_mawps = [88.23]
 
-results_dir = "/home/sliu/project_space/pruning_cfails/Math/gts/mawps/"
-output_files = os.listdir(os.path.join(results_dir))
-all_methods = sorted_nicely(output_files)
+robert_gmp_mawps = [87.08, 86.46, 87.29, 87.14, 85.36, 84.84, 84.79, 84.64, 84.48, 84.06]
+robert_omp_after_mawps = [88.59, 88.39, 88.59, 88.59, 87,55, 86.41, 85.42, 86.41, 86.01, 84.32, 81.25]
+robert_omp_before_mawps = [80.85, 72.14, 21.03, 0.8, 0.8,0.8,0.8,0.8,0.8,0.8 ]
+robert_omp_rigl_mawps  = [80.36, 72.22, 15.04, 0.8, 0.8,0.8,0.8,0.8,0.8,0.8 ]
 
+robert_random_after_mawps  = [87.23, 87.14, 86.72, 86.01, 85.73, 84.58, 83.85, 83.39, 82.66, 81.35]
+robert_random_before_mawps = [81.93, 82.66, 82.60, 82.24, 83.02, 83.33, 81.35, 82.31, 80.26, 80.98]
+robert_random_rigl_mawps   = [54.15, 44.37, 58.25, 64.01, 64.50, 63.68, 61.29, 59.32, 57.27, 56.61]
 
-results = []
-for method in all_methods:
-    if 'dense' not in method and 'imp' not in method and 'omp_rigl' not in method and 'omp_before' not in method:
-        # print(method)
-        method_dirs = os.path.join(results_dir, str(method))
-        method_sparsity = sorted_nicely(os.listdir(method_dirs))
+robert_snip_mawps = [69.68, 70.50, 70.01, 69.35, 70.09, 68.77, 69.10, 68.36, 68.11, 65.98]
 
-        for sparsity in method_sparsity:
-            sparsity_dir = os.path.join(method_dirs, sparsity,'out', 'CV_results_cv_mawps.json')
-            with open(sparsity_dir) as file:
-                for line in file:
-                    if '5-fold avg acc score' in line:
-                        results.append(100*float(line.split()[-1][1:-2]))
+robert_snip_rigl_mawps = [69.84, 69.59, 69.51, 69.67, 69.10, 68.44, ]
 
+robert_lth_mawps = [81.18, 80.69, ]
 
-# gmp
-# omp_after
-# random_before actually is random after
-# random_rigl
-# snip_before
-# snip_rigl
-
-def swapPositions(lis, pos1, pos2):
-    temp=lis[pos1]
-    lis[pos1]=lis[pos2]
-    lis[pos2]=temp
-    return lis
-
-robert_gmp_mawps = [86.67, 86.77, 86.77, 86.56, 85.16, 84.53, 84.38, 83.49, 84,47, 84.37]
-robert_omp_after_mawps = results[10:20]
-robert_omp_after_mawps = swapPositions(robert_omp_after_mawps, 7, 9)
-robert_random_after_mawps = results[20:30]
-robert_random_after_mawps = swapPositions(robert_random_after_mawps, 7, 9)
-robert_random_rigl_mawps = results[30:40]
-robert_random_rigl_mawps = swapPositions(robert_random_rigl_mawps, 7, 9)
-robert_snip_mawps = results[40:50]
-robert_snip_mawps = swapPositions(robert_snip_mawps, 7, 9)
-robert_snip_rigl_mawps = results[50:60]
-robert_snip_rigl_mawps = swapPositions(robert_snip_rigl_mawps, 7, 9)
-robert_random_before_mawps = [81.14, 79.32, 81.51, 82.5, 81.35, 81.30, 80.94, 80.36, 79.58, 80.05]
-
-robert_lth_mawps = [88.28, 88.43, 87.71, 86.98, 84.22, 83.13, 81.93, 81.41, 80.36, 80.73]
-robert_omp_before_mawps = [87.97, 85.83, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1]
-robert_omp_rigl_mawps  = [87.45, 84.16, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1]
 
 
 roberta_large = fig.add_subplot(1,3,1)
@@ -106,49 +72,19 @@ roberta_large.spines['top'].set_visible(False)
 
 # asdiv 
 
-dense_asdiv = [78.64]
-
-results_dir = "/home/sliu/project_space/pruning_cfails/Math/gts/asdiv/"
-output_files = os.listdir(os.path.join(results_dir))
-all_methods = sorted_nicely(output_files)
+dense_asdiv = [80.61]
 
 
-results_sdiv = []
-for method in all_methods:
-    if 'dense' not in method and 'imp' not in method:
-        print(method)
-        method_dirs = os.path.join(results_dir, str(method))
-        method_sparsity = sorted_nicely(os.listdir(method_dirs))
-
-        for sparsity in method_sparsity:
-            print(sparsity)
-            sparsity_dir = os.path.join(method_dirs, sparsity,'out', 'CV_results_cv_asdiv-a.json')
-            with open(sparsity_dir) as file:
-                for line in file:
-                    if '5-fold avg acc score' in line:
-                        results_sdiv.append(100*float(line.split()[-1][1:-2]))
-
-print(np.array(results_sdiv).reshape(10,-1))
-robert_gmp_asdiv = [77.24, 78.55, 78.23, 75.35, 69.60, 65.57, 66.56, 67.63, 67.94, 67.79]
-robert_gm_after_asdiv = [79.78, 78.96466721, 79.21117502, 68.69350863, 65.73541495, 68.44700082, 67.78964667,  67.4609696, 65.16023007, 63.92769104]
-robert_gm_before_asdiv = [78.14297453, 71.73377157,  0.82169269,  0.82169269,  0.82169269,  0.82169269, 0.82169269 , 0.82169269 , 0.82169269 , 0.82169269]
-robert_gm_rigl_asdiv = [75.51, 68.69, 0.82169269,  0.82169269,  0.82169269,  0.82169269, 0.82169269 , 0.82169269 , 0.82169269 , 0.82169269]
-
-robert_random_after_asdiv = [71.73377157, 67.4609696,  62.53081348, 63.43467543, 60.14790468, 60.55875103,
-  59.90139688, 58.75102712, 57.27198028, 58.50451931]
-
-# print(robert_random_after_asdiv)
-robert_random_before_asdiv = [48.06902219, 45.76828266, 51.68447001, 54.97124076, 59.16187346, 59.07970419,
-  58.91536565, 58.17584224, 55.87510271, 45.35743632]
-# print(robert_random_before_asdiv)
-robert_random_rigl_asdiv = [35.08627773 ,44.28923583, 49.30156122, 56.86113394, 55.05341002, 58.09367297,
-  57.60065735, 59.98356615, 56.9433032,  53.73870173]
-robert_snip_asdiv= [59.65488907, 56.20377979, 61.05176664 ,60.39441249 ,53.73870173 ,60.55875103,
-  60.47658176, 59.49055053, 59.81922761, 60.31224322 ]
-robert_snip_rigl_asdiv= [60.06573541, 61.38044371, 61.70912079, 61.13393591, 61.21610518, 60.72308956,
-  61.13393591 ,61.46261298,60.6409203 , 59.49055053 ]
-
-robert_lth_asdiv = [80.27, 79.38, 77.32, 71.90, 65.08, 59.57, 56.86, 54.15, 54.81, 52.67]
+robert_random_after_asdiv  = [76.08, 70.58, 70.58, 69.26, 70.00, 66.72, 66.06, 63.43, 61.29, 58.99]
+robert_random_before_asdiv = [56.53, 54.56, 56.36, 64.09, 65.57, 66.22, 64.09, 59.65, 59.07, 56.53]
+robert_random_rigl_asdiv   = [54.15, 44.37, 58.25, 64.01, 64.50, 63.68, 61.29, 59.32, 57.27, 56.61]
+robert_gm_after_asdiv = [80.69, 80.36, 78.88, 72.96, 70.09, 69.59, 69.02, 63.10, 45.76, 30.32]
+robert_gm_before_asdiv = [80.85, 72.14, 21.03, 0.8, 0.8,0.8,0.8,0.8,0.8,0.8 ]
+robert_gm_rigl_asdiv  = [80.36, 72.22, 15.04, 0.8, 0.8,0.8,0.8,0.8,0.8,0.8 ]
+robert_gmp_asdiv = [78.55, 78.06, 78.14, 76.49, 73.95, 74.19, 76.41, 73.21, 74.93]
+robert_snip_asdiv = [69.68, 70.50, 70.01, 69.35, 70.09, 68.77, 69.10, 68.36, 68.11, 65.98]
+robert_snip_rigl_asdiv = [69.84, 69.59, 69.51, 69.67, 69.10, 68.44, ]
+robert_lth_asdiv = [81.18, 80.69, 77.56, 71.81, 69.43, 65.98, 64.91, 62.53, 59.98, 54.97]
 
 
 
