@@ -14,7 +14,7 @@ source activate prune_cry
 
 for sparsity in 0.8325 0.866 0.893
 do
-saved_dir=/home/sliu/project_space/pruning_cfails/Math/g2t/asdiv/omp_after/$sparsity
+saved_dir=/home/sliu/project_space/pruning_cfails/Math/g2t/asdiv/omp_after_seed2/$sparsity
 
 python -m src.main -mode train -gpu 0 -embedding roberta -emb_name roberta-base -embedding_size 768 -hidden_size 384 \
 -depth 2 -lr 8e-4 -emb_lr 1e-5 -batch_size 8 -epochs 50 -dataset cv_asdiv-a -full_cv -run_name graph2tree_run_cv_asdiv-a \

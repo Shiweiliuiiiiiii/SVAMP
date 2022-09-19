@@ -327,6 +327,7 @@ def main():
 
 				# reset metric for GMP to avoid the best model is chosen before the target sparsity
 				if mask and args.sparse_mode == 'GMP' and mask.steps >= mask.final_prune_time:
+					logger.info('clean historical metrics for GMP')
 					max_val_acc = 0.0
 					max_train_acc = 0.0
 					eq_acc = 0.0
