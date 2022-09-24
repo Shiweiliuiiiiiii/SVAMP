@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os, re
 from matplotlib.pyplot import figure
-fig = figure(num=None, figsize=(19, 6), dpi=150, facecolor='w', edgecolor='k')
+fig = figure(num=None, figsize=(16, 10), dpi=150, facecolor='w', edgecolor='k')
 fontsize = 14
 Titlesize = 18
 markersize = 7
@@ -21,57 +21,19 @@ x_axis = range(10)
 
 dense_mawps = [88.49]
 
-results_dir = "/home/sliu/project_space/pruning_cfails/Math/gts/mawps/"
-output_files = os.listdir(os.path.join(results_dir))
-all_methods = sorted_nicely(output_files)
-
-
-results = []
-for method in all_methods:
-    if 'dense' not in method and 'imp' not in method and 'omp_rigl' not in method and 'omp_before' not in method:
-        # print(method)
-        method_dirs = os.path.join(results_dir, str(method))
-        method_sparsity = sorted_nicely(os.listdir(method_dirs))
-
-        for sparsity in method_sparsity:
-            sparsity_dir = os.path.join(method_dirs, sparsity,'out', 'CV_results_cv_mawps.json')
-            with open(sparsity_dir) as file:
-                for line in file:
-                    if '5-fold avg acc score' in line:
-                        results.append(100*float(line.split()[-1][1:-2]))
-
-
-# gmp
-# omp_after
-# random_before actually is random after
-# random_rigl
-# snip_before
-# snip_rigl
-
 def swapPositions(lis, pos1, pos2):
     temp=lis[pos1]
     lis[pos1]=lis[pos2]
     lis[pos2]=temp
     return lis
 
-robert_gmp_mawps = [86.67, 86.77, 86.77, 86.56, 85.16, 84.53, 84.38, 83.49, 84,47, 84.37]
-robert_omp_after_mawps = results[10:20]
-robert_omp_after_mawps = swapPositions(robert_omp_after_mawps, 7, 9)
-print(robert_omp_after_mawps)
-robert_random_after_mawps = results[20:30]
-robert_random_after_mawps = swapPositions(robert_random_after_mawps, 7, 9)
-print(robert_random_after_mawps)
-robert_random_rigl_mawps = results[30:40]
-robert_random_rigl_mawps = swapPositions(robert_random_rigl_mawps, 7, 9)
-print(robert_random_rigl_mawps)
-robert_snip_mawps = results[40:50]
-robert_snip_mawps = swapPositions(robert_snip_mawps, 7, 9)
-print(robert_snip_mawps)
-robert_snip_rigl_mawps = results[50:60]
-robert_snip_rigl_mawps = swapPositions(robert_snip_rigl_mawps, 7, 9)
-print(robert_snip_rigl_mawps)
+robert_gmp_mawps = [86.67, 86.77, 86.77, 86.56, 85.16, 84.53, 84.38, 83.49, 84.47, 84.37]
+robert_omp_after_mawps = [87.91666666666667, 88.125, 87.55208333333333, 85.9375, 84.73958333333333, 84.89583333333334, 84.6875, 85.36458333333333, 83.48958333333333, 84.84375]
+robert_random_after_mawps = [86.45833333333334, 84.63541666666666, 83.80208333333333, 83.59375, 82.03125, 81.66666666666667, 81.82291666666667, 79.79166666666667, 80.05208333333333, 80.0]
+robert_random_rigl_mawps = [80.83333333333333, 76.97916666666667, 83.4375, 83.125, 81.71875, 81.25, 81.30208333333333, 80.26041666666667, 76.875, 78.4375]
+robert_snip_mawps = [82.1875, 81.97916666666667, 81.14583333333333, 80.88541666666667, 81.45833333333333, 81.09375, 80.52083333333333, 81.19791666666667, 80.0, 80.83333333333333]
+robert_snip_rigl_mawps = [81.875, 81.61458333333333, 81.5625, 80.36458333333333, 81.40625, 81.04166666666667, 80.98958333333334, 80.67708333333333, 80.88541666666667, 81.19791666666667]
 robert_random_before_mawps = [81.14, 79.32, 81.51, 82.5, 81.35, 81.30, 80.94, 80.36, 79.58, 80.05]
-
 robert_lth_mawps = [88.28, 88.43, 87.71, 86.98, 84.22, 83.13, 81.93, 81.41, 80.36, 80.73]
 robert_omp_before_mawps = [87.97, 85.83, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1]
 robert_omp_rigl_mawps  = [87.45, 84.16, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1]
@@ -80,25 +42,26 @@ robert_omp_rigl_mawps  = [87.45, 84.16, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1]
 roberta_large = fig.add_subplot(2,3,1)
 roberta_large.plot(x_axis, dense_mawps*10,  '-o',color='black',linewidth=linewidth, markersize=markersize, )
 
-roberta_large.plot(x_axis, robert_snip_mawps,  '-o',color='#00FF00',linewidth=linewidth, markersize=markersize, )
+roberta_large.plot(x_axis, robert_snip_mawps,  '-o',color='#228B22',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_lth_mawps,  '-o', color='orange',linewidth=linewidth, markersize=markersize, )
-roberta_large.plot(x_axis, robert_snip_rigl_mawps,  '--o',color='#00FF00',linewidth=linewidth, markersize=markersize )
+roberta_large.plot(x_axis, robert_snip_rigl_mawps,  '--o',color='#228B22',linewidth=linewidth, markersize=markersize )
 roberta_large.plot(x_axis, robert_omp_after_mawps,  '-o',color='#00BFFF',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_before_mawps,  '-o',color='brown',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_after_mawps,  '-o',color='#0072BD',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_rigl_mawps,  '--o',color='brown',linewidth=linewidth, markersize=markersize)
-roberta_large.plot(x_axis, robert_gmp_mawps,  '-o', color='magenta',linewidth=linewidth, markersize=markersize, )
-roberta_large.plot(x_axis, robert_omp_before_mawps,  '-o' ,color='#bcbd22',linewidth=linewidth, markersize=markersize, )
-roberta_large.plot(x_axis, robert_omp_rigl_mawps,  '--o',color='#bcbd22',linewidth=linewidth, markersize=markersize )
+roberta_large.plot(x_axis, robert_gmp_mawps,  '-o', color='#CD00CD',linewidth=linewidth, markersize=markersize, )
+# roberta_large.plot(x_axis, robert_omp_before_mawps,  '-o' ,color='#bcbd22',linewidth=linewidth, markersize=markersize, )
+# roberta_large.plot(x_axis, robert_omp_rigl_mawps,  '--o',color='#bcbd22',linewidth=linewidth, markersize=markersize )
 
 
 roberta_large.set_title('GTS on MAWPS',fontsize=Titlesize)
 roberta_large.set_xticks(range(10))
 # roberta_large.axes.get_xaxis().set_visible(False)
 roberta_large.set_ylabel('Accuracy [%]', fontsize=Titlesize)
-roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
-roberta_large.set_xticklabels([], rotation=45,fontsize=fontsize )
-roberta_large.set_xticklabels(np.array( [0.2, 0.36, 0.488, 0.590, 0.672, 0.738, 0.791, 0.8325, 0.866, 0.893]), fontsize=10 )
+# roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
+roberta_large.xaxis.set_ticks(x_axis)
+roberta_large.set_xticklabels(np.array([0.2, 0.36, 0.488, 0.590, 0.672, 0.738, 0.791, 0.8325, 0.866, 0.893]), rotation=45, fontsize=10 )
+plt.ylim(70,89.8)
 roberta_large.tick_params(axis='both', which='major', labelsize=fontsize)
 # xposition = [3,7]
 # for xc in xposition:
@@ -113,27 +76,8 @@ roberta_large.spines['top'].set_visible(False)
 
 dense_asdiv = [78.64]
 
-results_dir = "/home/sliu/project_space/pruning_cfails/Math/gts/asdiv/"
-output_files = os.listdir(os.path.join(results_dir))
-all_methods = sorted_nicely(output_files)
 
-
-results_sdiv = []
-for method in all_methods:
-    if 'dense' not in method and 'imp' not in method:
-        print(method)
-        method_dirs = os.path.join(results_dir, str(method))
-        method_sparsity = sorted_nicely(os.listdir(method_dirs))
-
-        for sparsity in method_sparsity:
-            print(sparsity)
-            sparsity_dir = os.path.join(method_dirs, sparsity,'out', 'CV_results_cv_asdiv-a.json')
-            with open(sparsity_dir) as file:
-                for line in file:
-                    if '5-fold avg acc score' in line:
-                        results_sdiv.append(100*float(line.split()[-1][1:-2]))
-
-print(np.array(results_sdiv).reshape(10,-1))
+# print(np.array(results_sdiv).reshape(10,-1))
 robert_gmp_asdiv = [77.24, 78.55, 78.23, 75.35, 69.60, 65.57, 66.56, 67.63, 67.94, 67.79]
 robert_gm_after_asdiv = [79.78, 78.96466721, 79.21117502, 68.69350863, 65.73541495, 68.44700082, 67.78964667,  67.4609696, 65.16023007, 63.92769104]
 robert_gm_before_asdiv = [78.14297453, 71.73377157,  0.82169269,  0.82169269,  0.82169269,  0.82169269, 0.82169269 , 0.82169269 , 0.82169269 , 0.82169269]
@@ -161,25 +105,26 @@ robert_lth_asdiv = [80.27, 79.38, 77.32, 71.90, 65.08, 59.57, 56.86, 54.15, 54.8
 roberta_large = fig.add_subplot(2,3,2)
 roberta_large.plot(x_axis, dense_asdiv*10,  '-o',   label='Dense model',color='black',linewidth=linewidth, markersize=markersize, )
 
-roberta_large.plot(x_axis, robert_snip_asdiv,  '-o',   label='SNIP (Before)',color='#00FF00',linewidth=linewidth, markersize=markersize, )
+roberta_large.plot(x_axis, robert_snip_asdiv,  '-o',   label='SNIP (Before)',color='#228B22',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_lth_asdiv,  '-o',   label='LTH (After)',color='orange',linewidth=linewidth, markersize=markersize, )
-roberta_large.plot(x_axis, robert_snip_rigl_asdiv,  '--o',   label='SNIP+RIGL (Before)',color='#00FF00',linewidth=linewidth, markersize=markersize )
+roberta_large.plot(x_axis, robert_snip_rigl_asdiv,  '--o',   label='SNIP+RIGL (Before)',color='#228B22',linewidth=linewidth, markersize=markersize )
 roberta_large.plot(x_axis, robert_gm_after_asdiv,  '-o',   label='One-Shot LRR (After)',color='#00BFFF',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_before_asdiv,  '-o',   label='Random (Before)',color='brown',linewidth=linewidth, markersize=markersize, )
-roberta_large.plot(x_axis, robert_random_after_asdiv,  '-o',   label='Random LRR (After)',color='#0072BD',linewidth=linewidth, markersize=markersize, )
+roberta_large.plot(x_axis, robert_random_after_asdiv,  '-o',   label='Random (After)',color='#0072BD',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_rigl_asdiv,  '--o',   label='Random+RIGL (Before)',color='brown',linewidth=linewidth, markersize=markersize)
-roberta_large.plot(x_axis, robert_gmp_asdiv,  '-o',   label='GMP (During)',color='magenta',linewidth=linewidth, markersize=markersize, )
-roberta_large.plot(x_axis, robert_gm_before_asdiv,  '-o',   label='OMP (Before)' ,color='#bcbd22',linewidth=linewidth, markersize=markersize, )
-roberta_large.plot(x_axis, robert_gm_rigl_asdiv,  '--o',   label='OMP+RIGL (Before)',color='#bcbd22',linewidth=linewidth, markersize=markersize )
+roberta_large.plot(x_axis, robert_gmp_asdiv,  '-o',   label='GMP (During)',color='#CD00CD',linewidth=linewidth, markersize=markersize, )
+# roberta_large.plot(x_axis, robert_gm_before_asdiv,  '-o',   label='OMP (Before)' ,color='#bcbd22',linewidth=linewidth, markersize=markersize, )
+# roberta_large.plot(x_axis, robert_gm_rigl_asdiv,  '--o',   label='OMP+RIGL (Before)',color='#bcbd22',linewidth=linewidth, markersize=markersize )
 
 
 roberta_large.set_title('GTS on ASDiv-A',fontsize=Titlesize)
 roberta_large.set_xticks(range(10))
-# roberta_large.axes.get_xaxis().set_visible(False)
+plt.ylim(30,82)
 roberta_large.set_ylabel('Accuracy [%]', fontsize=Titlesize)
-roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
-roberta_large.set_xticklabels([], rotation=45,fontsize=fontsize )
-roberta_large.set_xticklabels(np.array( [0.2, 0.36, 0.488, 0.590, 0.672, 0.738, 0.791, 0.8325, 0.866, 0.893]), fontsize=10 )
+# roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
+roberta_large.xaxis.set_ticks(x_axis)
+roberta_large.set_xticklabels(np.array([0.2, 0.36, 0.488, 0.590, 0.672, 0.738, 0.791, 0.8325, 0.866, 0.893]), rotation=45, fontsize=10 )
+
 roberta_large.tick_params(axis='both', which='major', labelsize=fontsize)
 # xposition = [3,7]
 # for xc in xposition:
@@ -214,26 +159,27 @@ robert_random_rigl_svamp =   [28.4, 21.5, 25.3, 27.5, 26.2, 24.7, 25.0, 23.3, 24
 x_axis = range(10)
 roberta_large = fig.add_subplot(2,3,3)
 roberta_large.plot(x_axis, dense_svamp*10,  '-o',color='black',linewidth=linewidth, markersize=markersize, )
-
-roberta_large.plot(x_axis, robert_snip_svamp,  '-o',color='#00FF00',linewidth=linewidth, markersize=markersize, )
+plt.ylim(20,42)
+roberta_large.plot(x_axis, robert_snip_svamp,  '-o',color='#228B22',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_lth_svamp,  '-o', color='orange',linewidth=linewidth, markersize=markersize, )
-roberta_large.plot(x_axis, robert_snip_rigl_svamp,  '--o',color='#00FF00',linewidth=linewidth, markersize=markersize )
+roberta_large.plot(x_axis, robert_snip_rigl_svamp,  '--o',color='#228B22',linewidth=linewidth, markersize=markersize )
 roberta_large.plot(x_axis, robert_gm_after_svamp,  '-o',color='#00BFFF',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_before_svamp,  '-o',color='brown',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_after_svamp,  '-o',color='#0072BD',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_rigl_svamp,  '--o',color='brown',linewidth=linewidth, markersize=markersize)
-roberta_large.plot(x_axis, robert_gmp_svamp,  '-o', color='magenta',linewidth=linewidth, markersize=markersize, )
-roberta_large.plot(x_axis, robert_gm_before_svamp,  '-o' ,color='#bcbd22',linewidth=linewidth, markersize=markersize, )
-roberta_large.plot(x_axis, robert_gm_rigl_svamp,  '--o',color='#bcbd22',linewidth=linewidth, markersize=markersize )
+roberta_large.plot(x_axis, robert_gmp_svamp,  '-o', color='#CD00CD',linewidth=linewidth, markersize=markersize, )
+# roberta_large.plot(x_axis, robert_gm_before_svamp,  '-o' ,color='#bcbd22',linewidth=linewidth, markersize=markersize, )
+# roberta_large.plot(x_axis, robert_gm_rigl_svamp,  '--o',color='#bcbd22',linewidth=linewidth, markersize=markersize )
 
 
 roberta_large.set_title('GTS on SVAMP',fontsize=Titlesize)
 roberta_large.set_xticks(range(10))
 # roberta_large.axes.set_ylabel().set_visible(True)
 roberta_large.set_ylabel('Accuracy [%]', fontsize=Titlesize)
-roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
-roberta_large.set_xticklabels([], rotation=45,fontsize=fontsize )
-roberta_large.set_xticklabels(np.array( [0.2, 0.36, 0.488, 0.590, 0.672, 0.738, 0.791, 0.8325, 0.866, 0.893]), fontsize=10 )
+# roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
+roberta_large.xaxis.set_ticks(x_axis)
+roberta_large.set_xticklabels(np.array([0.2, 0.36, 0.488, 0.590, 0.672, 0.738, 0.791, 0.8325, 0.866, 0.893]), rotation=45, fontsize=10 )
+
 roberta_large.tick_params(axis='both', which='major', labelsize=fontsize)
 # xposition = [3,7]
 # for xc in xposition:
@@ -252,7 +198,7 @@ dense_mawps = [88.23]
 robert_gmp_mawps = [87.08, 86.46, 87.29, 87.14, 86.06, 84.84, 84.79, 84.64, 84.48, 84.06]
 robert_omp_after_mawps = [88.59, 88.39, 88.59, 87.55, 86.41, 85.42, 86.41, 86.09, 84.32, 81.25]
 robert_omp_before_mawps = [87.81, 86.46, 2.08, 2.08, 2.08, 2.08, 2.08, 2.08, 2.08, 2.08]
-robert_omp_rigl_mawps  = [87.81, 86.09,  2.08, 2.08, 2.08, 2.08, 2.08, 2.08, 2.08,]
+robert_omp_rigl_mawps  = [87.81, 86.09,  2.08, 2.08, 2.08, 2.08, 2.08, 2.08, 2.08, 2.08]
 
 robert_random_after_mawps  = [87.23, 87.14, 86.72, 86.01, 85.73, 84.58, 83.85, 83.39, 82.66, 81.35]
 robert_random_before_mawps = [81.93, 82.66, 82.60, 82.24, 83.02, 83.33, 81.35, 82.31, 80.26, 80.98]
@@ -269,9 +215,9 @@ robert_lth_mawps = [87.86, 88.54, 89.47, 88.85, 87.60, 86.14, 84.68, 84.01, 82.8
 roberta_large = fig.add_subplot(2,3,4)
 roberta_large.plot(x_axis, dense_mawps*10,  '-o',color='black',linewidth=linewidth, markersize=markersize, )
 
-roberta_large.plot(x_axis, robert_snip_mawps,  '-o',color='#00FF00',linewidth=linewidth, markersize=markersize, )
+roberta_large.plot(x_axis, robert_snip_mawps,  '-o',color='#228B22',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_lth_mawps,  '-o', color='orange',linewidth=linewidth, markersize=markersize, )
-roberta_large.plot(x_axis, robert_snip_rigl_mawps,  '--o',color='#00FF00',linewidth=linewidth, markersize=markersize )
+roberta_large.plot(x_axis, robert_snip_rigl_mawps,  '--o',color='#228B22',linewidth=linewidth, markersize=markersize )
 roberta_large.plot(x_axis, robert_omp_after_mawps,  '-o',color='#00BFFF',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_before_mawps,  '-o',color='brown',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_after_mawps,  '-o',color='#0072BD',linewidth=linewidth, markersize=markersize, )
@@ -281,9 +227,9 @@ roberta_large.plot(x_axis, robert_gmp_mawps,  '-o', color='magenta',linewidth=li
 # roberta_large.plot(x_axis, robert_omp_rigl_mawps,  '--o',color='#bcbd22',linewidth=linewidth, markersize=markersize )
 
 
-roberta_large.set_title('GTS on MAWPS',fontsize=Titlesize)
+roberta_large.set_title('Graph2Tree on MAWPS',fontsize=Titlesize)
 roberta_large.set_xticks(range(10))
-# roberta_large.axes.get_xaxis().set_visible(False)
+plt.ylim(70,89.8)
 roberta_large.set_ylabel('Accuracy [%]', fontsize=Titlesize)
 roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
 roberta_large.set_xticklabels([], rotation=45,fontsize=fontsize )
@@ -321,19 +267,19 @@ robert_lth_asdiv = [81.18, 80.69, 77.56, 71.81, 69.43, 65.98, 64.91, 62.53, 59.9
 roberta_large = fig.add_subplot(2,3,5)
 roberta_large.plot(x_axis, dense_asdiv*10,  '-o',   color='black',linewidth=linewidth, markersize=markersize, )
 
-roberta_large.plot(x_axis, robert_snip_asdiv,  '-o',   color='#00FF00',linewidth=linewidth, markersize=markersize, )
+roberta_large.plot(x_axis, robert_snip_asdiv,  '-o',   color='#228B22',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_lth_asdiv,  '-o',  color='orange',linewidth=linewidth, markersize=markersize, )
-roberta_large.plot(x_axis, robert_snip_rigl_asdiv,  '--o', color='#00FF00',linewidth=linewidth, markersize=markersize )
+roberta_large.plot(x_axis, robert_snip_rigl_asdiv,  '--o', color='#228B22',linewidth=linewidth, markersize=markersize )
 roberta_large.plot(x_axis, robert_gm_after_asdiv,  '-o',  color='#00BFFF',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_before_asdiv,  '-o',  color='brown',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_after_asdiv,  '-o',   color='#0072BD',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_rigl_asdiv,  '--o',  color='brown',linewidth=linewidth, markersize=markersize)
-roberta_large.plot(x_axis, robert_gmp_asdiv_seed2,  '-o',   color='magenta',linewidth=linewidth, markersize=markersize, )
-# roberta_large.plot(x_axis, robert_gm_before_asdiv,  '-o',   label='OMP (Before)' ,color='#bcbd22',linewidth=linewidth, markersize=markersize, )
-# roberta_large.plot(x_axis, robert_gm_rigl_asdiv,  '--o',   label='OMP+RIGL (Before)',color='#bcbd22',linewidth=linewidth, markersize=markersize )
+roberta_large.plot(x_axis, robert_gmp_asdiv_seed2,  '-o',   color='#CD00CD',linewidth=linewidth, markersize=markersize, )
+# roberta_large.plot(x_axis, robert_gm_before_asdiv,  '-o',  color='#bcbd22',linewidth=linewidth, markersize=markersize, )
+# roberta_large.plot(x_axis, robert_gm_rigl_asdiv,  '--o',  color='#bcbd22',linewidth=linewidth, markersize=markersize )
 
 
-roberta_large.set_title('GTS on ASDiv-A',fontsize=Titlesize)
+roberta_large.set_title('Graph2Tree on ASDiv-A',fontsize=Titlesize)
 roberta_large.set_xticks(range(10))
 # roberta_large.axes.get_xaxis().set_visible(False)
 roberta_large.set_ylabel('Accuracy [%]', fontsize=Titlesize)
@@ -374,29 +320,26 @@ x_axis = range(10)
 roberta_large = fig.add_subplot(2,3,6)
 roberta_large.plot(x_axis, dense_svamp*10,  '-o',color='black',linewidth=linewidth, markersize=markersize, )
 
-roberta_large.plot(x_axis, robert_snip_svamp,  '-o',color='#00FF00',linewidth=linewidth, markersize=markersize, )
+roberta_large.plot(x_axis, robert_snip_svamp,  '-o',color='#228B22',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_lth_svamp,  '-o', color='orange',linewidth=linewidth, markersize=markersize, )
-roberta_large.plot(x_axis, robert_snip_rigl_svamp,  '--o',color='#00FF00',linewidth=linewidth, markersize=markersize )
+roberta_large.plot(x_axis, robert_snip_rigl_svamp,  '--o',color='#228B22',linewidth=linewidth, markersize=markersize )
 roberta_large.plot(x_axis, robert_gm_after_svamp,  '-o',color='#00BFFF',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_before_svamp,  '-o',color='brown',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_after_svamp,  '-o',color='#0072BD',linewidth=linewidth, markersize=markersize, )
 roberta_large.plot(x_axis, robert_random_rigl_svamp,  '--o',color='brown',linewidth=linewidth, markersize=markersize)
-roberta_large.plot(x_axis, robert_gmp_svamp,  '-o', color='magenta',linewidth=linewidth, markersize=markersize, )
+roberta_large.plot(x_axis, robert_gmp_svamp,  '-o', color='#CD00CD',linewidth=linewidth, markersize=markersize, )
 # roberta_large.plot(x_axis, robert_gm_before_svamp,  '-o' ,color='#bcbd22',linewidth=linewidth, markersize=markersize, )
 # roberta_large.plot(x_axis, robert_gm_rigl_svamp,  '--o',color='#bcbd22',linewidth=linewidth, markersize=markersize )
 
 
-roberta_large.set_title('GTS on SVAMP',fontsize=Titlesize)
+roberta_large.set_title('Graph2Tree on SVAMP',fontsize=Titlesize)
 roberta_large.set_xticks(range(10))
-# roberta_large.axes.set_ylabel().set_visible(True)
+plt.ylim(25,45)
 roberta_large.set_ylabel('Accuracy [%]', fontsize=Titlesize)
 roberta_large.set_xlabel('Sparsity',fontsize=fontsize)
 roberta_large.set_xticklabels([], rotation=45,fontsize=fontsize )
 roberta_large.set_xticklabels(np.array( [0.2, 0.36, 0.488, 0.590, 0.672, 0.738, 0.791, 0.8325, 0.866, 0.893]), fontsize=10 )
 roberta_large.tick_params(axis='both', which='major', labelsize=fontsize)
-# xposition = [3,7]
-# for xc in xposition:
-#     plt.axvline(x=xc, color='#a90308', linestyle='--', alpha=0.5)
 roberta_large.grid(True, linestyle='-', linewidth=0.5, )
 
 roberta_large.spines['right'].set_visible(False)
@@ -405,7 +348,7 @@ roberta_large.spines['top'].set_visible(False)
 
 # plt.tight_layout()
 fig.legend(loc='lower center', bbox_to_anchor=(0.0, 0.0, 1, 1), fancybox=False, shadow=False, ncol=6, fontsize=fontsize, frameon=False)
-fig.subplots_adjust(left=0.05 , bottom=0.3, right=0.99, top=0.95, wspace=0.2, hspace=0.2)
+fig.subplots_adjust(left=0.06, bottom=0.2, right=0.95, top=0.95, wspace=0.2, hspace=0.35)
 
-plt.savefig('gts_all.pdf')
+plt.savefig('mathall.pdf')
 plt.show()

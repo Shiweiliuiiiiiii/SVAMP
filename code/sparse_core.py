@@ -50,6 +50,7 @@ class Masking(object):
             print('Supported modes are:', str(growth_modes))
 
         self.fix = args.fix
+        self.noembed = args.noembed
         self.sparse_init = args.sparse_init
         self.sparse_mode = args.sparse_mode
         self.update_frequency = args.update_frequency
@@ -97,6 +98,10 @@ class Masking(object):
                 if len(tensor.size()) == 2 or len(tensor.size()) == 4:
                     self.names.append(name)
                     self.masks[name] = torch.ones_like(tensor, dtype=torch.float32, requires_grad=False).to(self.device)
+
+        if self.noembed:
+            print('Removing embeddings layers')
+            self.remove_weight_partial_name('embeddings')
 
         if self.sparse_init == 'snip' or (not self.fix):
             print('Removing bert_model.pooler')

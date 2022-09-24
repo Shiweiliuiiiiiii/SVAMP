@@ -87,9 +87,10 @@ def build_parser():
 	parser.add_argument('-copy_nums', type=int, default=0, help='store copy_nums')
 
 	# sparse training and pruning
-	parser.add_argument('--sparse', action='store_true', help='Enable sparse mode. Default: True.')
-	parser.add_argument('--fix', action='store_true', help='Fix sparse connectivity during training. Default: True.')
-	parser.add_argument('--fp16', action='store_true', help='Enable fp16 training.')
+	parser.add_argument('--sparse', action='store_true', help='Enable sparse mode. Default: False.')
+	parser.add_argument('--noembed', action='store_true', help='Do no prune embedding layers. Default: False.')
+	parser.add_argument('--fix', action='store_true', help='Fix sparse connectivity during training. Default: False.')
+	parser.add_argument('--fp16', action='store_true', help='Enable fp16 training. Default: False.')
 	parser.add_argument('--sparse_init', type=str, default='ERK', help='sparse initialization')
 	parser.add_argument('--growth', type=str, default='random',
 						help='Growth mode. Choose from: momentum, random, random_unfired, and gradient.')
