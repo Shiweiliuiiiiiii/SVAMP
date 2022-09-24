@@ -19,7 +19,7 @@ saved_dir=/home/sliu/project_space/pruning_cfails/Math/g2t/mawps-asdiv-a_svamp/o
 python -m src.main -mode train -gpu 0 -embedding roberta -emb_name roberta-base -embedding_size 768 -hidden_size 384 \
 -depth 2 -lr 8e-4 -emb_lr 1e-5 -batch_size 8 -epochs 50 -dataset mawps-asdiv-a_svamp -run_name graph2tree_run_mawps-asdiv-a_svamp \
 --fix --sparse_init one_shot_gm --sparsity $sparsity --sparse --output_dir $saved_dir \
---pretrained_dir /home/sliu/project_space/pruning_cfails/Math/g2t/mawps-asdiv-a_svamp/imp/0.2/IMP_best_iter_0/ -save_model -no-full_cv -results --noembed
+--pretrained_dir /home/sliu/project_space/pruning_cfails/Math/g2t/mawps-asdiv-a_svamp/dense/ -save_model -no-full_cv -results --noembed
 
 rm -rf $save_dir/models/graph2tree_run_mawps-asdiv-a_svamp/model.pt
 
